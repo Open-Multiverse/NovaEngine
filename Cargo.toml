@@ -1,0 +1,44 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/nova_core",
+    "crates/nova_render",
+    "crates/nova_physics",
+    "crates/nova_ui",
+    "crates/nova_animation",
+    "crates/nova_engine",
+    "examples/basic_demo",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/user/nova_engine"
+rust-version = "1.80"
+
+[workspace.dependencies]
+# Internal crates
+nova_core = { path = "crates/nova_core" }
+nova_render = { path = "crates/nova_render" }
+nova_physics = { path = "crates/nova_physics" }
+nova_ui = { path = "crates/nova_ui" }
+nova_animation = { path = "crates/nova_animation" }
+nova_engine = { path = "crates/nova_engine" }
+
+# External dependencies
+bevy = { version = "0.15", default-features = false, features = [
+    "bevy_asset",
+    "bevy_render",
+    "bevy_core_pipeline",
+    "bevy_pbr",
+    "bevy_gltf",
+    "bevy_winit",
+    "webgpu",
+    "tonemapping_luts",
+    "ktx2",
+    "zstd",
+] }
+bevy_rapier3d = "0.28"
+bevy_egui = "0.31"
+log = "0.4"
