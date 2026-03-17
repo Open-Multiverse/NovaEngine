@@ -4,12 +4,13 @@
 
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
-use nova_engine::nova_core::NovaApp;
+use nova_engine::prelude::*;
 
 fn main() {
     NovaApp::new()
         .with_title("Nova Engine - 物理演示")
         .with_window_size(1280.0, 720.0)
+        .add_plugin(NovaPhysicsPlugin)
         .add_startup_system(setup)
         .add_system(spawn_falling_objects)
         .run();

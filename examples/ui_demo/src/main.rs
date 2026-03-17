@@ -5,12 +5,13 @@
 use bevy::prelude::*;
 use bevy_egui::egui;
 use bevy_egui::EguiContexts;
-use nova_engine::nova_core::NovaApp;
+use nova_engine::prelude::*;
 
 fn main() {
     NovaApp::new()
         .with_title("Nova Engine - UI 演示")
         .with_window_size(1280.0, 720.0)
+        .add_plugin(NovaUiPlugin)
         .add_startup_system(setup)
         .add_system(ui_demo_system)
         .run();

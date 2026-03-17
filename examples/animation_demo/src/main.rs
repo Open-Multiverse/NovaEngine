@@ -3,13 +3,13 @@
 //! 展示补间动画和关键帧动画
 
 use bevy::prelude::*;
-use nova_engine::nova_animation::prelude::{LoopMode, NovaEaseFunction, PositionTween};
-use nova_engine::nova_core::NovaApp;
+use nova_engine::prelude::*;
 
 fn main() {
     NovaApp::new()
         .with_title("Nova Engine - 动画演示")
         .with_window_size(1280.0, 720.0)
+        .add_plugin(NovaAnimationPlugin)
         .add_startup_system(setup)
         .run();
 }
