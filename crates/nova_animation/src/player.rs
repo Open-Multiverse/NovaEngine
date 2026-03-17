@@ -233,3 +233,134 @@ impl SimpleAnimationBuilder {
         clip
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_playback_state_default() {
+        let state = PlaybackState::default();
+        assert_eq!(state, PlaybackState::Stopped);
+    }
+
+    #[test]
+    fn test_animation_player_new() {
+        let player = AnimationPlayer::new();
+        assert!(player.clip_index.is_none());
+        assert_eq!(player.state, PlaybackState::Stopped);
+        assert_eq!(player.current_time, 0.0);
+        assert_eq!(player.speed, 1.0);
+        assert!(!player.looping);
+        assert!(player.auto_stop);
+    }
+
+    #[test]
+    fn test_animation_player_play() {
+        let mut player = AnimationPlayer::new();
+        player.play(0);
+
+        assert_eq!(player.clip_index, Some(0));
+        assert_eq!(player.state, PlaybackState::Playing);
+        assert_eq!(player.current_time, 0.0);
+    }
+
+    #[test]
+    fn test_animation_player_play_looping() {
+        let mut player = AnimationPlayer::new();
+        player.play_looping(1);
+
+        assert_eq!(player.clip_index, Some(1));
+        assert!(player.looping);
+        assert!(player.is_playing());
+    }
+
+    #[test]
+    fn test_animation_player_pause_resume() {
+        let mut player = AnimationPlayer::new();
+        player.play(0);
+        assert!(player.is_playing());
+
+        player.pause();
+        assert!(player.is_paused());
+        assert!(!player.is_playing());
+
+        player.resume();
+        assert!(player.is_playing());
+        assert!(!player.is_paused());
+    }
+
+    #[test]
+    fn test_animation_player_pause_when_stopped() {
+        let mut player = AnimationPlayer::new();
+        // 停止状态下暂停不应改变状态
+        player.pause();
+        assert!(player.is_stopped());
+    }
+
+    #[test]
+    fn test_animation_player_resume_when_playing() {
+        let mut player = AnimationPlayer::new();
+        player.play(0);
+        // 播放状态下恢复不应改变状态
+        player.resume();
+        assert!(player.is_playing());
+    }
+
+    #[test]
+    fn test_animation_player_stop() {
+        let mut player = AnimationPlayer::new();
+        player.play(0);
+        player.current_time = 5.0;
+
+        player.stop();
+        assert!(player.is_stopped());
+        assert_eq!(player.current_time, 0.0);
+    }
+
+    #[test]
+    fn test_animation_player_set_speed() {
+        let mut player = AnimationPlayer::new();
+        player.set_speed(2.0);
+        assert_eq!(player.speed, 2.0);
+    }
+
+    #[test]
+    fn test_animation_player_seek() {
+        let mut player = AnimationPlayer::new();
+        player.seek(3.5);
+        assert_eq!(player.current_time, 3.5);
+
+        // 负值应该被 clamp 到 0
+        player.seek(-1.0);
+        assert_eq!(player.current_time, 0.0);
+    }
+
+    #[test]
+    fn test_simple_animation_builder() {
+        let clip = SimpleAnimationBuilder::new("bounce")
+            .position_at(0.0, Vec3::ZERO)
+            .position_at(0.5, Vec3::new(0.0, 2.0, 0.0))
+            .position_at(1.0, Vec3::ZERO)
+            .looping()
+            .build();
+
+        assert_eq!(clip.name, "bounce");
+        assert!(clip.looping);
+        assert!(clip.position.is_some());
+        assert!(clip.rotation.is_none());
+        assert_eq!(clip.duration(), 1.0);
+    }
+
+    #[test]
+    fn test_simple_animation_builder_with_rotation() {
+        let clip = SimpleAnimationBuilder::new("spin")
+            .transform_at(0.0, Vec3::ZERO, Quat::IDENTITY)
+            .transform_at(1.0, Vec3::ONE, Quat::from_rotation_y(std::f32::consts::PI))
+            .build();
+
+        assert_eq!(clip.name, "spin");
+        assert!(clip.position.is_some());
+        assert!(clip.rotation.is_some());
+    }
+}

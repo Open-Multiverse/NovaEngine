@@ -211,3 +211,160 @@ impl AnimationClips {
         self.clips.iter().enumerate().find(|(_, c)| c.name == name)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_keyframe_new() {
+        let kf = Keyframe::new(1.5, Vec3::ONE);
+        assert_eq!(kf.time, 1.5);
+        assert_eq!(kf.value, Vec3::ONE);
+    }
+
+    #[test]
+    fn test_animation_track_new() {
+        let track: AnimationTrack<Vec3> = AnimationTrack::new();
+        assert_eq!(track.keyframe_count(), 0);
+        assert_eq!(track.duration(), 0.0);
+    }
+
+    #[test]
+    fn test_animation_track_add_keyframe() {
+        let mut track = AnimationTrack::new();
+        track.add_keyframe(1.0, Vec3::X);
+        track.add_keyframe(0.0, Vec3::ZERO);
+        track.add_keyframe(2.0, Vec3::Y);
+
+        assert_eq!(track.keyframe_count(), 3);
+        assert_eq!(track.duration(), 2.0);
+    }
+
+    #[test]
+    fn test_animation_track_keyframes_sorted() {
+        let mut track = AnimationTrack::new();
+        track.add_keyframe(2.0, Vec3::Y);
+        track.add_keyframe(0.0, Vec3::ZERO);
+        track.add_keyframe(1.0, Vec3::X);
+
+        // 关键帧应该按时间排序
+        let (k1, k2, _) = track.get_surrounding_keyframes(0.5).unwrap();
+        assert_eq!(k1.time, 0.0);
+        assert_eq!(k2.time, 1.0);
+    }
+
+    #[test]
+    fn test_animation_track_get_surrounding_keyframes() {
+        let mut track = AnimationTrack::new();
+        track.add_keyframe(0.0, Vec3::ZERO);
+        track.add_keyframe(2.0, Vec3::ONE);
+
+        // 中间时间点
+        let result = track.get_surrounding_keyframes(1.0);
+        assert!(result.is_some());
+        let (k1, k2, t) = result.unwrap();
+        assert_eq!(k1.value, Vec3::ZERO);
+        assert_eq!(k2.value, Vec3::ONE);
+        assert!((t - 0.5).abs() < 0.001);
+
+        // 边界时间点
+        let result = track.get_surrounding_keyframes(0.0);
+        assert!(result.is_some());
+
+        let result = track.get_surrounding_keyframes(2.0);
+        assert!(result.is_some());
+
+        // 超出范围
+        let result = track.get_surrounding_keyframes(3.0);
+        assert!(result.is_none());
+    }
+
+    #[test]
+    fn test_animation_track_single_keyframe() {
+        let mut track = AnimationTrack::new();
+        track.add_keyframe(1.0, Vec3::ONE);
+
+        // 只有一个关键帧，无法获取 surrounding
+        assert!(track.get_surrounding_keyframes(0.5).is_none());
+    }
+
+    #[test]
+    fn test_animation_clip_new() {
+        let clip = AnimationClip::new("test_clip");
+        assert_eq!(clip.name, "test_clip");
+        assert!(clip.position.is_none());
+        assert!(clip.rotation.is_none());
+        assert!(clip.scale.is_none());
+        assert!(!clip.looping);
+    }
+
+    #[test]
+    fn test_animation_clip_duration() {
+        let mut pos_track = PositionTrack::new();
+        pos_track.add_keyframe(0.0, Vec3::ZERO);
+        pos_track.add_keyframe(2.0, Vec3::ONE);
+
+        let mut scale_track = ScaleTrack::new();
+        scale_track.add_keyframe(0.0, Vec3::ONE);
+        scale_track.add_keyframe(3.0, Vec3::splat(2.0));
+
+        let clip = AnimationClip::new("test")
+            .with_position(pos_track)
+            .with_scale(scale_track);
+
+        // 时长应该是所有轨道中最长的
+        assert_eq!(clip.duration(), 3.0);
+    }
+
+    #[test]
+    fn test_animation_clip_looping() {
+        let clip = AnimationClip::new("loop_test").looping();
+        assert!(clip.looping);
+    }
+
+    #[test]
+    fn test_animation_clip_sample() {
+        let mut pos_track = PositionTrack::new();
+        pos_track.add_keyframe(0.0, Vec3::ZERO);
+        pos_track.add_keyframe(1.0, Vec3::new(10.0, 0.0, 0.0));
+
+        let clip = AnimationClip::new("move").with_position(pos_track);
+
+        let base = Transform::default();
+        let sampled = clip.sample(0.5, &base);
+
+        // 在 0.5 秒时，位置应该在中间
+        assert!((sampled.translation.x - 5.0).abs() < 0.001);
+        assert!((sampled.translation.y - 0.0).abs() < 0.001);
+        assert!((sampled.translation.z - 0.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_animation_clips_add_and_get() {
+        let mut clips = AnimationClips::new();
+        let clip = AnimationClip::new("clip1");
+        let index = clips.add(clip);
+
+        assert_eq!(index, 0);
+        assert!(clips.get(0).is_some());
+        assert!(clips.get(1).is_none());
+    }
+
+    #[test]
+    fn test_animation_clips_find_by_name() {
+        let mut clips = AnimationClips::new();
+        clips.add(AnimationClip::new("idle"));
+        clips.add(AnimationClip::new("walk"));
+        clips.add(AnimationClip::new("run"));
+
+        let result = clips.find_by_name("walk");
+        assert!(result.is_some());
+        let (index, clip) = result.unwrap();
+        assert_eq!(index, 1);
+        assert_eq!(clip.name, "walk");
+
+        // 不存在的名称
+        assert!(clips.find_by_name("jump").is_none());
+    }
+}

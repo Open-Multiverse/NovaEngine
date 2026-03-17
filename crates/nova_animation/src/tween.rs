@@ -122,3 +122,84 @@ pub fn update_position_tweens(
         transform.translation = tween.start.lerp(tween.end, eased_t);
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_ease_linear() {
+        let ease = NovaEaseFunction::Linear;
+        assert!((ease.ease(0.0) - 0.0).abs() < 0.001);
+        assert!((ease.ease(0.5) - 0.5).abs() < 0.001);
+        assert!((ease.ease(1.0) - 1.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_ease_quad_in() {
+        let ease = NovaEaseFunction::QuadIn;
+        assert!((ease.ease(0.0) - 0.0).abs() < 0.001);
+        assert!((ease.ease(0.5) - 0.25).abs() < 0.001);
+        assert!((ease.ease(1.0) - 1.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_ease_quad_out() {
+        let ease = NovaEaseFunction::QuadOut;
+        assert!((ease.ease(0.0) - 0.0).abs() < 0.001);
+        assert!((ease.ease(0.5) - 0.75).abs() < 0.001);
+        assert!((ease.ease(1.0) - 1.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_ease_clamps_input() {
+        let ease = NovaEaseFunction::Linear;
+        // 超出范围的输入应该被 clamp
+        assert!((ease.ease(-0.5) - 0.0).abs() < 0.001);
+        assert!((ease.ease(1.5) - 1.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_position_tween_new() {
+        let tween = PositionTween::new(Vec3::ZERO, Vec3::ONE, 2.0);
+        assert_eq!(tween.start, Vec3::ZERO);
+        assert_eq!(tween.end, Vec3::ONE);
+        assert_eq!(tween.duration, 2.0);
+        assert_eq!(tween.elapsed, 0.0);
+    }
+
+    #[test]
+    fn test_position_tween_progress() {
+        let mut tween = PositionTween::new(Vec3::ZERO, Vec3::ONE, 2.0);
+        assert_eq!(tween.progress(), 0.0);
+
+        tween.elapsed = 1.0;
+        assert!((tween.progress() - 0.5).abs() < 0.001);
+
+        tween.elapsed = 2.0;
+        assert!((tween.progress() - 1.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_position_tween_is_finished() {
+        let mut tween = PositionTween::new(Vec3::ZERO, Vec3::ONE, 2.0);
+        assert!(!tween.is_finished());
+
+        tween.elapsed = 2.0;
+        assert!(tween.is_finished());
+
+        // Loop 模式永不完成
+        tween.loop_mode = LoopMode::Loop;
+        assert!(!tween.is_finished());
+    }
+
+    #[test]
+    fn test_position_tween_builder() {
+        let tween = PositionTween::new(Vec3::ZERO, Vec3::ONE, 1.0)
+            .with_ease(NovaEaseFunction::QuadIn)
+            .with_loop(LoopMode::PingPong);
+
+        assert!(matches!(tween.ease, NovaEaseFunction::QuadIn));
+        assert!(matches!(tween.loop_mode, LoopMode::PingPong));
+    }
+}

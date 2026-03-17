@@ -17,7 +17,7 @@
 //!
 //! fn setup(mut commands: Commands) {
 //!     // 添加相机
-//!     commands.spawn(Camera3dBundle::new());
+//!     commands.spawn(Camera3d::default());
 //! }
 //! ```
 
