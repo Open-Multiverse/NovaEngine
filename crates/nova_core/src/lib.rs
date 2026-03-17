@@ -5,15 +5,18 @@
 //! - 核心组件和资源
 //! - 插件系统
 //! - 调度阶段定义
+//! - 输入处理
 //! - Bevy 重导出
 
 pub mod app;
 pub mod components;
+pub mod input;
 pub mod plugin;
 pub mod prelude;
 pub mod schedule;
 
 pub use app::NovaApp;
+pub use input::NovaInputPlugin;
 pub use plugin::{NovaCorePlugin, NovaDefaultPlugins, NovaMinimalPlugins};
 
 // 重导出 Bevy 核心类型
