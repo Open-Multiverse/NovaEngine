@@ -42,7 +42,9 @@ impl AssetRegistry {
     /// 创建资源组
     pub fn create_group(&mut self, name: impl Into<String>) -> &mut AssetGroup {
         let name = name.into();
-        self.groups.entry(name.clone()).or_insert_with(|| AssetGroup::new(&name))
+        self.groups
+            .entry(name.clone())
+            .or_insert_with(|| AssetGroup::new(&name))
     }
 
     /// 获取资源组
@@ -215,7 +217,8 @@ mod tests {
     #[test]
     fn test_asset_group() {
         let mut registry = AssetRegistry::default();
-        registry.create_group("level1")
+        registry
+            .create_group("level1")
             .add("level1/map.json")
             .add("level1/tileset.png")
             .with_preload(true);
@@ -249,7 +252,10 @@ mod tests {
         assert!(!state.is_loading("missing.png"));
         assert!(!state.is_loaded("missing.png"));
         assert!(state.is_failed("missing.png"));
-        assert_eq!(state.get_error("missing.png"), Some(&"File not found".to_string()));
+        assert_eq!(
+            state.get_error("missing.png"),
+            Some(&"File not found".to_string())
+        );
     }
 
     #[test]

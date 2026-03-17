@@ -124,18 +124,14 @@ pub enum SceneComponent {
         range: f32,
     },
     /// 网格
-    Mesh {
-        shape: MeshShapeType,
-    },
+    Mesh { shape: MeshShapeType },
     /// 刚体
     RigidBody {
         #[serde(default)]
         body_type: RigidBodyType,
     },
     /// 碰撞器
-    Collider {
-        shape: ColliderShapeType,
-    },
+    Collider { shape: ColliderShapeType },
     /// 自定义组件（键值对）
     Custom {
         name: String,
@@ -362,14 +358,13 @@ mod tests {
 
     #[test]
     fn test_scene_json_roundtrip() {
-        let scene = SceneDefinition::new("TestScene")
-            .with_entity(
-                SceneEntity::new("cube")
-                    .with_position(0.0, 1.0, 0.0)
-                    .with_component(SceneComponent::Mesh {
-                        shape: MeshShapeType::Cube { size: 1.0 },
-                    }),
-            );
+        let scene = SceneDefinition::new("TestScene").with_entity(
+            SceneEntity::new("cube")
+                .with_position(0.0, 1.0, 0.0)
+                .with_component(SceneComponent::Mesh {
+                    shape: MeshShapeType::Cube { size: 1.0 },
+                }),
+        );
 
         let json = scene.to_json().unwrap();
         let loaded = SceneDefinition::from_json(&json).unwrap();

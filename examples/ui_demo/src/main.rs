@@ -104,13 +104,22 @@ fn ui_demo_system(
         .show(contexts.ctx_mut(), |ui| {
             // 选项卡
             ui.horizontal(|ui| {
-                if ui.selectable_label(state.selected_tab == 0, "变换").clicked() {
+                if ui
+                    .selectable_label(state.selected_tab == 0, "变换")
+                    .clicked()
+                {
                     state.selected_tab = 0;
                 }
-                if ui.selectable_label(state.selected_tab == 1, "外观").clicked() {
+                if ui
+                    .selectable_label(state.selected_tab == 1, "外观")
+                    .clicked()
+                {
                     state.selected_tab = 1;
                 }
-                if ui.selectable_label(state.selected_tab == 2, "动画").clicked() {
+                if ui
+                    .selectable_label(state.selected_tab == 2, "动画")
+                    .clicked()
+                {
                     state.selected_tab = 2;
                 }
             });
@@ -178,10 +187,7 @@ fn ui_demo_system(
                 2 => {
                     // 动画控制
                     ui.heading("旋转动画");
-                    ui.add(
-                        egui::Slider::new(&mut state.rotation_speed, 0.0..=5.0)
-                            .text("速度"),
-                    );
+                    ui.add(egui::Slider::new(&mut state.rotation_speed, 0.0..=5.0).text("速度"));
 
                     if ui.button("停止旋转").clicked() {
                         state.rotation_speed = 0.0;

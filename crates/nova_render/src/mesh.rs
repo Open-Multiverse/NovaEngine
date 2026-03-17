@@ -143,7 +143,11 @@ mod tests {
     fn test_mesh_shape_box() {
         let shape = MeshShape::box_shape(1.0, 2.0, 3.0);
         match shape {
-            MeshShape::Box { width, height, depth } => {
+            MeshShape::Box {
+                width,
+                height,
+                depth,
+            } => {
                 assert_eq!(width, 1.0);
                 assert_eq!(height, 2.0);
                 assert_eq!(depth, 3.0);
@@ -156,7 +160,10 @@ mod tests {
     fn test_mesh_shape_sphere() {
         let shape = MeshShape::sphere(1.5);
         match shape {
-            MeshShape::Sphere { radius, subdivisions } => {
+            MeshShape::Sphere {
+                radius,
+                subdivisions,
+            } => {
                 assert_eq!(radius, 1.5);
                 assert_eq!(subdivisions, 32);
             }

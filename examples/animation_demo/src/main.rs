@@ -52,13 +52,9 @@ fn setup(
             ..default()
         })),
         Transform::from_xyz(-4.0, 0.5, 0.0),
-        PositionTween::new(
-            Vec3::new(-4.0, 0.5, 0.0),
-            Vec3::new(-4.0, 3.0, 0.0),
-            2.0,
-        )
-        .with_ease(NovaEaseFunction::Linear)
-        .with_loop(LoopMode::PingPong),
+        PositionTween::new(Vec3::new(-4.0, 0.5, 0.0), Vec3::new(-4.0, 3.0, 0.0), 2.0)
+            .with_ease(NovaEaseFunction::Linear)
+            .with_loop(LoopMode::PingPong),
     ));
 
     // === 缓入动画 ===
@@ -69,13 +65,9 @@ fn setup(
             ..default()
         })),
         Transform::from_xyz(-1.5, 0.5, 0.0),
-        PositionTween::new(
-            Vec3::new(-1.5, 0.5, 0.0),
-            Vec3::new(-1.5, 3.0, 0.0),
-            2.0,
-        )
-        .with_ease(NovaEaseFunction::QuadIn)
-        .with_loop(LoopMode::PingPong),
+        PositionTween::new(Vec3::new(-1.5, 0.5, 0.0), Vec3::new(-1.5, 3.0, 0.0), 2.0)
+            .with_ease(NovaEaseFunction::QuadIn)
+            .with_loop(LoopMode::PingPong),
     ));
 
     // === 缓出动画 ===
@@ -86,13 +78,9 @@ fn setup(
             ..default()
         })),
         Transform::from_xyz(1.0, 0.5, 0.0),
-        PositionTween::new(
-            Vec3::new(1.0, 0.5, 0.0),
-            Vec3::new(1.0, 3.0, 0.0),
-            2.0,
-        )
-        .with_ease(NovaEaseFunction::QuadOut)
-        .with_loop(LoopMode::PingPong),
+        PositionTween::new(Vec3::new(1.0, 0.5, 0.0), Vec3::new(1.0, 3.0, 0.0), 2.0)
+            .with_ease(NovaEaseFunction::QuadOut)
+            .with_loop(LoopMode::PingPong),
     ));
 
     // === 缓入缓出动画 ===
@@ -103,13 +91,9 @@ fn setup(
             ..default()
         })),
         Transform::from_xyz(3.5, 0.5, 0.0),
-        PositionTween::new(
-            Vec3::new(3.5, 0.5, 0.0),
-            Vec3::new(3.5, 3.0, 0.0),
-            2.0,
-        )
-        .with_ease(NovaEaseFunction::QuadInOut)
-        .with_loop(LoopMode::PingPong),
+        PositionTween::new(Vec3::new(3.5, 0.5, 0.0), Vec3::new(3.5, 3.0, 0.0), 2.0)
+            .with_ease(NovaEaseFunction::QuadInOut)
+            .with_loop(LoopMode::PingPong),
     ));
 
     // === 循环移动的球体 ===
@@ -121,12 +105,8 @@ fn setup(
             ..default()
         })),
         Transform::from_xyz(0.0, 2.0, 3.0),
-        PositionTween::new(
-            Vec3::new(-3.0, 2.0, 3.0),
-            Vec3::new(3.0, 2.0, 3.0),
-            3.0,
-        )
-        .with_ease(NovaEaseFunction::CubicInOut)
-        .with_loop(LoopMode::PingPong),
+        PositionTween::new(Vec3::new(-3.0, 2.0, 3.0), Vec3::new(3.0, 2.0, 3.0), 3.0)
+            .with_ease(NovaEaseFunction::CubicInOut)
+            .with_loop(LoopMode::PingPong),
     ));
 }

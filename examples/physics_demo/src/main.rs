@@ -76,8 +76,7 @@ fn setup(
             base_color: Color::srgb(0.5, 0.5, 0.7),
             ..default()
         })),
-        Transform::from_xyz(-6.0, 2.0, 0.0)
-            .with_rotation(Quat::from_rotation_z(0.3)),
+        Transform::from_xyz(-6.0, 2.0, 0.0).with_rotation(Quat::from_rotation_z(0.3)),
         RigidBody::Fixed,
         Collider::cuboid(4.0, 0.25, 2.0),
     ));

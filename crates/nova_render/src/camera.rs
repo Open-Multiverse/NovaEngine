@@ -73,8 +73,7 @@ mod tests {
 
     #[test]
     fn test_nova_camera_with_position() {
-        let camera = NovaCamera3d::new()
-            .with_position(Vec3::new(10.0, 5.0, 10.0));
+        let camera = NovaCamera3d::new().with_position(Vec3::new(10.0, 5.0, 10.0));
 
         assert_eq!(camera.transform.translation, Vec3::new(10.0, 5.0, 10.0));
     }

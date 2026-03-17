@@ -153,7 +153,8 @@ impl SpatialAudioSettings {
         } else if distance >= self.max_distance {
             0.0
         } else {
-            let normalized = (distance - self.min_distance) / (self.max_distance - self.min_distance);
+            let normalized =
+                (distance - self.min_distance) / (self.max_distance - self.min_distance);
             (1.0 - normalized).powf(self.rolloff_factor)
         }
     }
