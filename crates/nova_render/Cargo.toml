@@ -1,0 +1,10 @@
+[package]
+name = "nova_render"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+nova_core = { workspace = true }
+bevy = { workspace = true }
+log = { workspace = true }

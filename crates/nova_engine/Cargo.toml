@@ -1,0 +1,18 @@
+[package]
+name = "nova_engine"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+nova_core = { workspace = true }
+nova_render = { workspace = true }
+nova_physics = { workspace = true }
+nova_ui = { workspace = true }
+nova_animation = { workspace = true }
+bevy = { workspace = true }
+log = { workspace = true }
+
+# WASM 支持
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "0.3", features = ["wasm_js"] }

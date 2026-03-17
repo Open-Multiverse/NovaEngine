@@ -1,0 +1,11 @@
+[package]
+name = "nova_physics"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+nova_core = { workspace = true }
+bevy = { workspace = true }
+bevy_rapier3d = { workspace = true }
+log = { workspace = true }

@@ -1,0 +1,11 @@
+[package]
+name = "nova_ui"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+nova_core = { workspace = true }
+bevy = { workspace = true }
+bevy_egui = { workspace = true }
+log = { workspace = true }
