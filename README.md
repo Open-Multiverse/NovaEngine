@@ -1,5 +1,7 @@
 # Nova Engine
 
+[中文文档](docs/README_CN.md)
+
 A Web 3D game engine built with Rust and WebAssembly.
 
 ## Features
