@@ -1,0 +1,9 @@
+[package]
+name = "physics_demo"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+nova_engine = { workspace = true }
+bevy = { workspace = true }
+bevy_rapier3d = { workspace = true }

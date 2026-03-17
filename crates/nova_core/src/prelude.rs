@@ -7,6 +7,10 @@ pub use crate::input::{
     NovaInputPlugin,
 };
 pub use crate::plugin::{NovaCorePlugin, NovaDefaultPlugins, NovaMinimalPlugins};
+pub use crate::scene::{
+    CurrentScene, LoadSceneEvent, SceneComponent, SceneDefinition, SceneEntity, SceneLoadedEvent,
+    SceneSettings,
+};
 pub use crate::schedule::{NovaSystemSet, Schedules};
 
 // 重导出 Bevy prelude

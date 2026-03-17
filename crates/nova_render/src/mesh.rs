@@ -125,3 +125,75 @@ pub fn create_sphere_mesh(meshes: &mut Assets<Mesh>, radius: f32) -> Handle<Mesh
 pub fn create_plane_mesh(meshes: &mut Assets<Mesh>, size: f32) -> Handle<Mesh> {
     NovaMeshBuilder::new(MeshShape::plane(size)).build(meshes)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_mesh_shape_cube() {
+        let shape = MeshShape::cube(2.0);
+        match shape {
+            MeshShape::Cube { size } => assert_eq!(size, 2.0),
+            _ => panic!("Expected Cube"),
+        }
+    }
+
+    #[test]
+    fn test_mesh_shape_box() {
+        let shape = MeshShape::box_shape(1.0, 2.0, 3.0);
+        match shape {
+            MeshShape::Box { width, height, depth } => {
+                assert_eq!(width, 1.0);
+                assert_eq!(height, 2.0);
+                assert_eq!(depth, 3.0);
+            }
+            _ => panic!("Expected Box"),
+        }
+    }
+
+    #[test]
+    fn test_mesh_shape_sphere() {
+        let shape = MeshShape::sphere(1.5);
+        match shape {
+            MeshShape::Sphere { radius, subdivisions } => {
+                assert_eq!(radius, 1.5);
+                assert_eq!(subdivisions, 32);
+            }
+            _ => panic!("Expected Sphere"),
+        }
+    }
+
+    #[test]
+    fn test_mesh_shape_plane() {
+        let shape = MeshShape::plane(10.0);
+        match shape {
+            MeshShape::Plane { size } => assert_eq!(size, 10.0),
+            _ => panic!("Expected Plane"),
+        }
+    }
+
+    #[test]
+    fn test_mesh_shape_to_mesh() {
+        // 测试网格生成不会 panic
+        let shapes = vec![
+            MeshShape::cube(1.0),
+            MeshShape::box_shape(1.0, 2.0, 3.0),
+            MeshShape::sphere(1.0),
+            MeshShape::plane(5.0),
+            MeshShape::cylinder(0.5, 2.0),
+            MeshShape::capsule(0.5, 1.0),
+            MeshShape::torus(1.0, 0.3),
+        ];
+
+        for shape in shapes {
+            let _mesh = shape.to_mesh();
+        }
+    }
+
+    #[test]
+    fn test_nova_mesh_builder() {
+        let builder = NovaMeshBuilder::new(MeshShape::cube(1.0));
+        assert!(matches!(builder.shape, MeshShape::Cube { .. }));
+    }
+}

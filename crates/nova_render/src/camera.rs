@@ -58,3 +58,35 @@ impl NovaCamera3d {
         )
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_nova_camera_default() {
+        let camera = NovaCamera3d::default();
+        assert!((camera.fov - std::f32::consts::FRAC_PI_4).abs() < 0.001);
+        assert!((camera.near - 0.1).abs() < 0.001);
+        assert!((camera.far - 1000.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_nova_camera_with_position() {
+        let camera = NovaCamera3d::new()
+            .with_position(Vec3::new(10.0, 5.0, 10.0));
+
+        assert_eq!(camera.transform.translation, Vec3::new(10.0, 5.0, 10.0));
+    }
+
+    #[test]
+    fn test_nova_camera_looking_at() {
+        let camera = NovaCamera3d::new()
+            .with_position(Vec3::new(0.0, 0.0, 10.0))
+            .looking_at(Vec3::ZERO, Vec3::Y);
+
+        // 验证相机朝向原点
+        let forward = camera.transform.forward();
+        assert!(forward.z < 0.0); // 朝向 -Z 方向
+    }
+}

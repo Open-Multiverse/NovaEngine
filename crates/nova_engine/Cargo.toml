@@ -10,6 +10,8 @@ nova_render = { workspace = true }
 nova_physics = { workspace = true }
 nova_ui = { workspace = true }
 nova_animation = { workspace = true }
+nova_audio = { workspace = true }
+nova_assets = { workspace = true }
 bevy = { workspace = true }
 log = { workspace = true }
 

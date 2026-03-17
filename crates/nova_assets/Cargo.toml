@@ -1,17 +1,16 @@
 [package]
-name = "nova_animation"
+name = "nova_assets"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+description = "Nova Engine 资源管理系统"
 
 [dependencies]
-nova_core = { workspace = true }
 bevy = { workspace = true }
-log = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true }
 
 [[bench]]
-name = "animation_bench"
+name = "assets_bench"
 harness = false

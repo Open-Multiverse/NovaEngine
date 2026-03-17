@@ -51,3 +51,53 @@ impl GameTime {
         self.delta * self.scale
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_entity_name() {
+        let name = EntityName::new("Player");
+        assert_eq!(name.0, "Player");
+    }
+
+    #[test]
+    fn test_visible_component() {
+        let visible = Visible::new(true);
+        assert!(visible.0);
+
+        let invisible = Visible::new(false);
+        assert!(!invisible.0);
+
+        let default_visible = Visible::default();
+        assert!(!default_visible.0);
+    }
+
+    #[test]
+    fn test_game_time_new() {
+        let time = GameTime::new();
+        assert_eq!(time.elapsed, 0.0);
+        assert_eq!(time.delta, 0.0);
+        assert_eq!(time.scale, 1.0);
+    }
+
+    #[test]
+    fn test_game_time_scaled_delta() {
+        let mut time = GameTime::new();
+        time.delta = 0.016; // ~60 FPS
+        time.scale = 2.0;
+
+        let scaled = time.scaled_delta();
+        assert!((scaled - 0.032).abs() < 0.0001);
+    }
+
+    #[test]
+    fn test_game_time_paused() {
+        let mut time = GameTime::new();
+        time.delta = 0.016;
+        time.scale = 0.0; // 暂停
+
+        assert_eq!(time.scaled_delta(), 0.0);
+    }
+}

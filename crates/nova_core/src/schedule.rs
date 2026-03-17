@@ -59,3 +59,29 @@ pub enum NovaSystemSet {
     /// UI 更新
     Ui,
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_schedules_constants() {
+        // 验证常量可以正常访问
+        let _ = Schedules::STARTUP;
+        let _ = Schedules::UPDATE;
+        let _ = Schedules::FIXED_UPDATE;
+    }
+
+    #[test]
+    fn test_nova_system_set_equality() {
+        assert_eq!(NovaSystemSet::Input, NovaSystemSet::Input);
+        assert_ne!(NovaSystemSet::Input, NovaSystemSet::Logic);
+    }
+
+    #[test]
+    fn test_nova_system_set_debug() {
+        let set = NovaSystemSet::Physics;
+        let debug_str = format!("{:?}", set);
+        assert!(debug_str.contains("Physics"));
+    }
+}

@@ -14,3 +14,9 @@ pub use nova_ui::prelude::*;
 
 // 动画模块
 pub use nova_animation::prelude::*;
+
+// 音频模块
+pub use nova_audio::prelude::*;
+
+// 资源模块
+pub use nova_assets::prelude::*;

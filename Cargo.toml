@@ -6,8 +6,13 @@ members = [
     "crates/nova_physics",
     "crates/nova_ui",
     "crates/nova_animation",
+    "crates/nova_audio",
+    "crates/nova_assets",
     "crates/nova_engine",
     "examples/basic_demo",
+    "examples/physics_demo",
+    "examples/animation_demo",
+    "examples/ui_demo",
 ]
 
 [workspace.package]
@@ -24,6 +29,8 @@ nova_render = { path = "crates/nova_render" }
 nova_physics = { path = "crates/nova_physics" }
 nova_ui = { path = "crates/nova_ui" }
 nova_animation = { path = "crates/nova_animation" }
+nova_audio = { path = "crates/nova_audio" }
+nova_assets = { path = "crates/nova_assets" }
 nova_engine = { path = "crates/nova_engine" }
 
 # External dependencies
@@ -42,3 +49,4 @@ bevy = { version = "0.15", default-features = false, features = [
 bevy_rapier3d = "0.28"
 bevy_egui = "0.31"
 log = "0.4"
+criterion = "0.5"

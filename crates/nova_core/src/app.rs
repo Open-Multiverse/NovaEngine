@@ -56,6 +56,17 @@ impl NovaApp {
         self
     }
 
+    /// 设置窗口大小
+    pub fn with_window_size(mut self, width: f32, height: f32) -> Self {
+        self.app
+            .add_systems(Startup, move |mut windows: Query<&mut Window>| {
+                if let Ok(mut window) = windows.get_single_mut() {
+                    window.resolution.set(width, height);
+                }
+            });
+        self
+    }
+
     /// 添加插件
     pub fn add_plugin<T: Plugin>(mut self, plugin: T) -> Self {
         self.app.add_plugins(plugin);
