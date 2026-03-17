@@ -13,6 +13,7 @@ members = [
     "examples/physics_demo",
     "examples/animation_demo",
     "examples/ui_demo",
+    "examples/breakout_3d",
 ]
 
 [workspace.package]
@@ -41,6 +42,7 @@ bevy = { version = "0.15", default-features = false, features = [
     "bevy_pbr",
     "bevy_gltf",
     "bevy_winit",
+    "bevy_state",
     "webgpu",
     "tonemapping_luts",
     "ktx2",

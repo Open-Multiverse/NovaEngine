@@ -1,0 +1,10 @@
+[build]
+target = "index.html"
+
+[watch]
+watch = ["src", "index.html"]
+
+[[hooks]]
+stage = "pre_build"
+command = "cargo"
+command_arguments = ["fmt", "--", "--check"]

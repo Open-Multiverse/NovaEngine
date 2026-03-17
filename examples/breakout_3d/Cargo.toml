@@ -1,0 +1,11 @@
+[package]
+name = "breakout_3d"
+version = "0.1.0"
+edition = "2021"
+description = "3D 打砖块游戏 - Nova Engine 示例"
+
+[dependencies]
+nova_engine = { path = "../../crates/nova_engine" }
+bevy = { workspace = true, features = ["bevy_state"] }
+bevy_rapier3d = { workspace = true }
+bevy_egui.workspace = true
