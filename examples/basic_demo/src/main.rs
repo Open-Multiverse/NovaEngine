@@ -16,6 +16,7 @@ fn main() {
         .with_title("Nova Engine - 基础示例")
         .add_plugin(FrameTimeDiagnosticsPlugin)
         .add_plugin(NovaRenderPlugin)
+        .add_plugin(OrbitCameraPlugin)
         .add_plugin(NovaPhysicsPlugin)
         .add_plugin(NovaUiPlugin)
         .add_plugin(NovaAnimationPlugin)
@@ -46,13 +47,17 @@ fn setup(
     // 初始化状态
     commands.insert_resource(DemoState::default());
 
-    // 相机
-    commands.spawn(
+    // 相机（带轨道控制器）
+    commands.spawn((
         NovaCamera3d::new()
             .with_position(Vec3::new(8.0, 8.0, 8.0))
             .looking_at(Vec3::ZERO, Vec3::Y)
             .bundle(),
-    );
+        OrbitCameraController::new()
+            .with_target(Vec3::ZERO)
+            .with_distance(12.0)
+            .with_rotation(0.8, -0.5),
+    ));
 
     // 方向光
     commands.spawn((
