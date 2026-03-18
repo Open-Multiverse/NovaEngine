@@ -10,6 +10,7 @@ mod components;
 mod movement;
 mod selection;
 mod setup;
+mod ui;
 
 fn main() {
     NovaApp::new()
@@ -21,6 +22,7 @@ fn main() {
         .add_plugin(selection::SelectionPlugin)
         .add_plugin(movement::MovementPlugin)
         .add_plugin(combat::CombatPlugin)
+        .add_plugin(ui::UiPlugin)
         .add_startup_system(setup::setup_game)
         .run();
 }
