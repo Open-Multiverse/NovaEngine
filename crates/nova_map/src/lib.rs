@@ -35,7 +35,7 @@ pub use generator::{MapGenerator, MapGeneratorConfig, TerrainWeights};
 pub use heightmap::HeightMap;
 pub use pathfinding::{PathFollow, PathResult, Pathfinder};
 pub use serialization::MapFile;
-pub use tile::{Tile, TerrainType};
+pub use tile::{TerrainType, Tile};
 pub use tilemap::TileMap;
 
 /// Nova Map 插件
@@ -55,10 +55,7 @@ impl Plugin for NovaMapPlugin {
             // 添加系统
             .add_systems(
                 Update,
-                (
-                    camera::rts_camera_system,
-                    camera::rts_camera_zoom_system,
-                ),
+                (camera::rts_camera_system, camera::rts_camera_zoom_system),
             );
     }
 }

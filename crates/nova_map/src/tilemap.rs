@@ -3,7 +3,7 @@
 use bevy::prelude::*;
 use serde::{Deserialize, Serialize};
 
-use crate::tile::{Tile, TerrainType};
+use crate::tile::{TerrainType, Tile};
 
 /// 瓦片地图资源
 #[derive(Resource, Clone, Debug, Serialize, Deserialize, Reflect)]

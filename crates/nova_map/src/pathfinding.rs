@@ -52,11 +52,7 @@ pub struct Pathfinder;
 
 impl Pathfinder {
     /// A* 寻路
-    pub fn find_path(
-        tilemap: &TileMap,
-        start: (u32, u32),
-        goal: (u32, u32),
-    ) -> Option<PathResult> {
+    pub fn find_path(tilemap: &TileMap, start: (u32, u32), goal: (u32, u32)) -> Option<PathResult> {
         if start == goal {
             return Some(PathResult {
                 path: vec![],
@@ -65,7 +61,11 @@ impl Pathfinder {
         }
 
         // 检查目标是否可达
-        if !tilemap.get(goal.0, goal.1).map(|t| t.walkable()).unwrap_or(false) {
+        if !tilemap
+            .get(goal.0, goal.1)
+            .map(|t| t.walkable())
+            .unwrap_or(false)
+        {
             return None;
         }
 

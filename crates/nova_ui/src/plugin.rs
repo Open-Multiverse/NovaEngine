@@ -23,7 +23,9 @@ fn setup_chinese_fonts(mut contexts: EguiContexts) {
     // 使用思源黑体简体中文子集
     fonts.font_data.insert(
         "source_han_sans_cn".to_owned(),
-        FontData::from_static(include_bytes!("../assets/fonts/SourceHanSansCN-Regular.otf")),
+        FontData::from_static(include_bytes!(
+            "../assets/fonts/SourceHanSansCN-Regular.otf"
+        )),
     );
 
     // 将中文字体添加到默认字体族的最前面
