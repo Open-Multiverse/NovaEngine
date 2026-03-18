@@ -39,11 +39,11 @@ pub fn setup_game(
         RtsCameraController::default().with_map_bounds(map_width, map_height, 5.0),
     ));
 
-    // 光照
+    // 光照（禁用阴影以提升性能）
     commands.spawn((
         DirectionalLight {
             illuminance: 15000.0,
-            shadows_enabled: true,
+            shadows_enabled: false,
             ..default()
         },
         Transform::from_rotation(Quat::from_euler(EulerRot::XYZ, -0.8, 0.3, 0.0)),
@@ -74,15 +74,34 @@ fn spawn_terrain(
         tilemap.tile_size() * 0.95,
     ));
 
-    for (x, y, tile) in tilemap.iter() {
-        let world_pos = tilemap.tile_to_world(x, y);
-        let color = tile.terrain.color();
+    // 预创建每种地形类型的材质（优化：避免每格子创建独立材质）
+    use nova_map::prelude::TerrainType;
+    use std::collections::HashMap;
 
+    let terrain_materials: HashMap<TerrainType, Handle<StandardMaterial>> = [
+        TerrainType::Grass,
+        TerrainType::Desert,
+        TerrainType::Water,
+        TerrainType::Mountain,
+        TerrainType::Forest,
+    ]
+    .into_iter()
+    .map(|terrain| {
         let material = materials.add(StandardMaterial {
-            base_color: color,
+            base_color: terrain.color(),
             perceptual_roughness: 0.9,
             ..default()
         });
+        (terrain, material)
+    })
+    .collect();
+
+    for (x, y, tile) in tilemap.iter() {
+        let world_pos = tilemap.tile_to_world(x, y);
+        let material = terrain_materials
+            .get(&tile.terrain)
+            .cloned()
+            .unwrap_or_else(|| terrain_materials[&TerrainType::Grass].clone());
 
         commands.spawn((
             Mesh3d(tile_mesh.clone()),
