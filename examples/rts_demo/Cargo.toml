@@ -1,0 +1,12 @@
+[package]
+name = "rts_demo"
+version = "0.1.0"
+edition = "2021"
+description = "RTS 游戏原型 - Nova Engine 示例"
+
+[dependencies]
+nova_engine = { path = "../../crates/nova_engine" }
+nova_map = { path = "../../crates/nova_map" }
+bevy = { workspace = true, features = ["bevy_state"] }
+bevy_rapier3d = { workspace = true }
+bevy_egui = { workspace = true }

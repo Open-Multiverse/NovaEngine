@@ -15,6 +15,7 @@ members = [
     "examples/animation_demo",
     "examples/ui_demo",
     "examples/breakout_3d",
+    "examples/rts_demo",
 ]
 
 [workspace.package]
