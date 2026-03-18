@@ -6,6 +6,7 @@ use nova_engine::prelude::*;
 use nova_map::prelude::*;
 
 mod components;
+mod selection;
 mod setup;
 
 fn main() {
@@ -15,6 +16,7 @@ fn main() {
         .add_plugin(NovaMapWithFogPlugin)
         .add_plugin(NovaPhysicsPlugin)
         .add_plugin(NovaUiPlugin)
+        .add_plugin(selection::SelectionPlugin)
         .add_startup_system(setup::setup_game)
         .run();
 }
