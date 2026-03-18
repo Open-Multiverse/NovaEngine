@@ -12,6 +12,7 @@ nova_ui = { workspace = true }
 nova_animation = { workspace = true }
 nova_audio = { workspace = true }
 nova_assets = { workspace = true }
+nova_map = { workspace = true }
 bevy = { workspace = true }
 log = { workspace = true }
 

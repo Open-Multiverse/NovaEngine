@@ -28,6 +28,7 @@ pub use nova_animation;
 pub use nova_assets;
 pub use nova_audio;
 pub use nova_core;
+pub use nova_map;
 pub use nova_physics;
 pub use nova_render;
 pub use nova_ui;
