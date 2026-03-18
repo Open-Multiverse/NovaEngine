@@ -8,4 +8,4 @@ pub use crate::pathfinding::*;
 pub use crate::serialization::*;
 pub use crate::tile::*;
 pub use crate::tilemap::*;
-pub use crate::NovaMapPlugin;
+pub use crate::{NovaMapPlugin, NovaMapWithFogPlugin};
