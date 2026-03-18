@@ -2,8 +2,15 @@
 
 use bevy::prelude::*;
 use nova_map::prelude::*;
+use wasm_bindgen::prelude::*;
 
 use crate::components::*;
+
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = window)]
+    fn hideLoading();
+}
 
 /// 初始化游戏场景
 pub fn setup_game(
@@ -59,6 +66,10 @@ pub fn setup_game(
 
     // 生成敌方单位
     spawn_enemy_units(&mut commands, &mut meshes, &mut materials);
+
+    // 通知前端加载完成
+    #[cfg(target_arch = "wasm32")]
+    hideLoading();
 }
 
 /// 渲染地形

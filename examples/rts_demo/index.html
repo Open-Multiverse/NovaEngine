@@ -50,16 +50,24 @@
         <p>加载中...</p>
     </div>
     <canvas id="nova-canvas" tabindex="0"></canvas>
-    <script type="module">
-        import init from './rts_demo.js';
-
-        init().then(() => {
+    <script>
+        // 供 WASM 调用的函数：隐藏加载界面（必须在 WASM 加载前定义）
+        window.hideLoading = function() {
             document.getElementById('loading').style.display = 'none';
             const canvas = document.getElementById('nova-canvas');
             canvas.focus();
-            canvas.addEventListener('click', () => canvas.focus());
-        }).catch(err => {
+        };
+    </script>
+    <script type="module">
+        import init from './rts_demo.js';
+
+        init().catch(err => {
             document.getElementById('loading').innerHTML = '<h1>加载失败</h1><p>' + err + '</p>';
+        });
+
+        // 点击画布时聚焦
+        document.getElementById('nova-canvas').addEventListener('click', function() {
+            this.focus();
         });
     </script>
 </body>

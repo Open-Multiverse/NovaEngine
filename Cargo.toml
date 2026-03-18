@@ -53,6 +53,7 @@ bevy = { version = "0.15", default-features = false, features = [
 ] }
 bevy_rapier3d = "0.28"
 bevy_egui = "0.31"
+wasm-bindgen = "0.2"
 log = "0.4"
 criterion = "0.5"
 noise = "0.9"
