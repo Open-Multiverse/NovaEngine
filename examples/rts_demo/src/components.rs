@@ -94,13 +94,15 @@ pub struct Selected;
 #[derive(Component)]
 pub struct AttackTarget(pub Entity);
 
-/// 资源点
+/// 资源点（预留扩展）
+#[allow(dead_code)]
 #[derive(Component)]
 pub struct ResourceNode {
     pub resource_type: ResourceType,
     pub amount: u32,
 }
 
+#[allow(dead_code)]
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum ResourceType {
     Crystal,
@@ -112,5 +114,6 @@ pub enum ResourceType {
 pub enum GameMode {
     #[default]
     Playing,
+    #[allow(dead_code)]
     Editor,
 }

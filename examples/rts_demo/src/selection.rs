@@ -115,7 +115,9 @@ pub fn screen_to_ground(
     camera: &Camera,
     camera_transform: &GlobalTransform,
 ) -> Option<Vec3> {
-    let ray = camera.viewport_to_world(camera_transform, screen_pos).ok()?;
+    let ray = camera
+        .viewport_to_world(camera_transform, screen_pos)
+        .ok()?;
 
     // 与 Y=0 平面求交
     let t = -ray.origin.y / ray.direction.y;

@@ -119,7 +119,11 @@ fn selection_box_ui(mut contexts: EguiContexts, selection_box: Res<SelectionBox>
     let rect = egui::Rect::from_min_max(min, max);
 
     // 绘制半透明填充
-    painter.rect_filled(rect, 0.0, egui::Color32::from_rgba_unmultiplied(0, 255, 0, 30));
+    painter.rect_filled(
+        rect,
+        0.0,
+        egui::Color32::from_rgba_unmultiplied(0, 255, 0, 30),
+    );
 
     // 绘制边框
     painter.rect_stroke(rect, 0.0, egui::Stroke::new(2.0, egui::Color32::GREEN));
