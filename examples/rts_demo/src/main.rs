@@ -5,6 +5,7 @@
 use nova_engine::prelude::*;
 use nova_map::prelude::*;
 
+mod combat;
 mod components;
 mod movement;
 mod selection;
@@ -19,6 +20,7 @@ fn main() {
         .add_plugin(NovaUiPlugin)
         .add_plugin(selection::SelectionPlugin)
         .add_plugin(movement::MovementPlugin)
+        .add_plugin(combat::CombatPlugin)
         .add_startup_system(setup::setup_game)
         .run();
 }
