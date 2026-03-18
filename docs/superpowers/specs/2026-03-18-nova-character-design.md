@@ -57,6 +57,12 @@
 | `nova_formation` | 群体怎么走（编队、阵型） | 单个单位的行为 |
 | `nova_animation` | 人物怎么动（动画播放、状态机） | 决策什么时候播放 |
 
+### 设计说明
+
+**属性与感知的关系**：`Attributes.vision_range` 是角色的基础视野属性，`Perception.vision_range` 从 `Attributes` 初始化，可被 buff/debuff 修改。`Perception` 是运行时状态，`Attributes` 是基础数据。
+
+**行为树执行模型**：采用每帧 tick 模式，在 `CharacterSet::Decision` 阶段执行。对于性能敏感场景，可考虑分帧执行（每帧只 tick 部分单位）。
+
 ## nova_character 模块设计
 
 ### 文件结构
