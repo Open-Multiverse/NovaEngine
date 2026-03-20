@@ -26,7 +26,7 @@ impl Default for CharacterType {
 }
 
 /// 角色标识组件
-#[derive(Component, Clone, Debug, Reflect)]
+#[derive(Component, Clone, Debug, Reflect, Serialize, Deserialize)]
 pub struct Character {
     pub id: CharacterId,
     pub name: String,
