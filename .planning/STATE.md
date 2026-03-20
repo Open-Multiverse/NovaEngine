@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 01-01-PLAN.md
-last_updated: "2026-03-20T11:04:32.414Z"
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-03-20T11:09:26.491Z"
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -47,6 +47,7 @@ Plan: 1 of 3
 
 *Updated after each plan completion*
 | Phase 01-测试基础设施修复 P01 | 8 | 2 tasks | 2 files |
+| Phase 01-测试基础设施修复 P02 | 3 | 3 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -61,6 +62,8 @@ Recent decisions affecting current work:
 - 初始化: 音频集成 Bevy 原生 AudioPlugin — 最小改动路径
 - [Phase 01-测试基础设施修复]: CharacterStats 内部持有 Attributes 实例，通过委托访问器暴露数值，避免破坏已有类型系统
 - [Phase 01-测试基础设施修复]: CharacterBundle 仅派生 Bundle+Default，current() 返回 &Self 满足 matches! 宏语义
+- [Phase 01-测试基础设施修复]: evaluate_node/execute_action 传递 blackboard 参数（替代方案 B），避免在 BtContext 存储原始指针
+- [Phase 01-测试基础设施修复]: ActionNode 手动实现 Debug，因为 Arc<dyn Fn> 不实现 Debug
 
 ### Pending Todos
 
@@ -75,6 +78,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-20T11:04:32.410Z
-Stopped at: Completed 01-01-PLAN.md
+Last session: 2026-03-20T11:09:26.487Z
+Stopped at: Completed 01-02-PLAN.md
 Resume file: None
