@@ -1,0 +1,11 @@
+[package]
+name = "nova_ai"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Nova Engine AI 决策系统 - 感知、行为树、性格情绪"
+
+[dependencies]
+nova_core = { workspace = true }
+nova_character = { workspace = true }
+bevy = { workspace = true }
