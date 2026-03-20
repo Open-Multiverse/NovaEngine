@@ -131,3 +131,12 @@ pub struct CharacterBundle {
 ---
 *Phase: 01-测试基础设施修复*
 *Completed: 2026-03-20*
+
+## Self-Check: PASSED
+
+- FOUND: crates/nova_character/src/character.rs
+- FOUND: crates/nova_character/src/state.rs
+- FOUND: .planning/phases/01-测试基础设施修复/01-01-SUMMARY.md
+- FOUND: commit fdacaf0 (feat: 添加 CharacterStats 和 CharacterBundle)
+- FOUND: commit 23688fa (feat: 为 CharacterState 添加 current() 方法)
+- FOUND: commit 648955a (docs: 完成计划文档)

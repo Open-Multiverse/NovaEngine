@@ -10,8 +10,8 @@
 - [x] **TESTFIX-01**: `CharacterBundle` 和 `CharacterStats` 类型在 `nova_character` 中存在且可从集成测试导入
 - [x] **TESTFIX-02**: `AiAgent`、`Blackboard` 组件在 `nova_ai` 中存在且可从集成测试导入
 - [x] **TESTFIX-03**: `BehaviorTree::sequence()` / `action()` builder API 在 `nova_ai` 中可用
-- [ ] **TESTFIX-04**: `cargo test --all` 全部通过，无编译错误
-- [ ] **TESTFIX-05**: `BrowserCompatibility::supports_webgpu()` 在非 WASM 环境返回 `false` 而非 `true`
+- [x] **TESTFIX-04**: `cargo test --all` 全部通过，无编译错误
+- [x] **TESTFIX-05**: `BrowserCompatibility::supports_webgpu()` 在非 WASM 环境返回 `false` 而非 `true`
 
 ### 角色移动系统（MOVE）
 
@@ -101,8 +101,8 @@
 | TESTFIX-01 | Phase 1 | Complete |
 | TESTFIX-02 | Phase 1 | Complete |
 | TESTFIX-03 | Phase 1 | Complete |
-| TESTFIX-04 | Phase 1 | Pending |
-| TESTFIX-05 | Phase 1 | Pending |
+| TESTFIX-04 | Phase 1 | Complete |
+| TESTFIX-05 | Phase 1 | Complete |
 | MOVE-01 | Phase 2 | Pending |
 | MOVE-02 | Phase 2 | Pending |
 | MOVE-03 | Phase 2 | Pending |
