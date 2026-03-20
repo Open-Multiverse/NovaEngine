@@ -1,0 +1,52 @@
+{
+  "characters": [
+    {
+      "id": "soldier",
+      "name": "士兵",
+      "character_type": "Infantry",
+      "attributes": {
+        "health": 100.0,
+        "attack": 10.0,
+        "defense": 5.0,
+        "move_speed": 5.0,
+        "attack_range": 1.5,
+        "attack_speed": 1.0,
+        "vision_range": 10.0
+      },
+      "model": {
+        "type": "Primitive",
+        "shape": { "Capsule": { "radius": 0.3, "height": 0.8 } },
+        "color": [0.2, 0.6, 1.0, 1.0]
+      },
+      "personality": {
+        "aggression": 0.6,
+        "courage": 0.7,
+        "discipline": 0.8
+      }
+    },
+    {
+      "id": "enemy_grunt",
+      "name": "敌兵",
+      "character_type": "Infantry",
+      "attributes": {
+        "health": 80.0,
+        "attack": 8.0,
+        "defense": 3.0,
+        "move_speed": 4.0,
+        "attack_range": 1.5,
+        "attack_speed": 1.2,
+        "vision_range": 8.0
+      },
+      "model": {
+        "type": "Primitive",
+        "shape": { "Capsule": { "radius": 0.3, "height": 0.8 } },
+        "color": [1.0, 0.3, 0.2, 1.0]
+      },
+      "personality": {
+        "aggression": 0.7,
+        "courage": 0.5,
+        "discipline": 0.5
+      }
+    }
+  ]
+}

@@ -7,6 +7,10 @@ description = "RTS 游戏原型 - Nova Engine 示例"
 [dependencies]
 nova_engine = { path = "../../crates/nova_engine" }
 nova_map = { path = "../../crates/nova_map" }
+nova_character = { path = "../../crates/nova_character" }
+nova_ai = { path = "../../crates/nova_ai" }
+nova_formation = { path = "../../crates/nova_formation" }
+nova_animation = { path = "../../crates/nova_animation" }
 bevy = { workspace = true, features = ["bevy_state"] }
 bevy_rapier3d = { workspace = true }
 bevy_egui = { workspace = true }

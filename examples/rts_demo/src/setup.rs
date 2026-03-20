@@ -4,8 +4,6 @@ use bevy::prelude::*;
 use nova_map::prelude::*;
 use wasm_bindgen::prelude::*;
 
-use crate::components::*;
-
 #[wasm_bindgen]
 extern "C" {
     #[wasm_bindgen(js_namespace = window)]
@@ -128,12 +126,6 @@ fn spawn_player_units(
     meshes: &mut ResMut<Assets<Mesh>>,
     materials: &mut ResMut<Assets<StandardMaterial>>,
 ) {
-    let unit_mesh = meshes.add(Capsule3d::new(0.3, 0.8));
-    let unit_material = materials.add(StandardMaterial {
-        base_color: Color::srgb(0.2, 0.6, 1.0),
-        ..default()
-    });
-
     // 在左下角生成 3 个单位
     let positions = [
         Vec3::new(-25.0, 0.5, -25.0),
@@ -141,19 +133,16 @@ fn spawn_player_units(
         Vec3::new(-24.0, 0.5, -23.0),
     ];
 
-    for pos in positions {
-        commands.spawn((
-            Unit,
-            Team::Player,
-            Health::new(100.0),
-            Attack::new(10.0, 5.0, 1.0),
-            Movement::new(5.0),
-            Selectable,
-            Vision::new(8),
-            Mesh3d(unit_mesh.clone()),
-            MeshMaterial3d(unit_material.clone()),
-            Transform::from_translation(pos),
-        ));
+    for (i, pos) in positions.iter().enumerate() {
+        let phase = i as f32 * std::f32::consts::TAU / positions.len() as f32;
+        crate::character_setup::spawn_player_unit(
+            commands,
+            meshes,
+            materials,
+            *pos,
+            i as u64,
+            phase,
+        );
     }
 }
 
@@ -163,12 +152,6 @@ fn spawn_enemy_units(
     meshes: &mut ResMut<Assets<Mesh>>,
     materials: &mut ResMut<Assets<StandardMaterial>>,
 ) {
-    let unit_mesh = meshes.add(Capsule3d::new(0.3, 0.8));
-    let unit_material = materials.add(StandardMaterial {
-        base_color: Color::srgb(1.0, 0.3, 0.2),
-        ..default()
-    });
-
     // 在右上角生成 3 个敌人
     let positions = [
         Vec3::new(25.0, 0.5, 25.0),
@@ -176,17 +159,15 @@ fn spawn_enemy_units(
         Vec3::new(24.0, 0.5, 23.0),
     ];
 
-    for pos in positions {
-        commands.spawn((
-            Unit,
-            Team::Enemy,
-            Health::new(100.0),
-            Attack::new(10.0, 5.0, 1.0),
-            Movement::new(4.0),
-            Vision::new(8),
-            Mesh3d(unit_mesh.clone()),
-            MeshMaterial3d(unit_material.clone()),
-            Transform::from_translation(pos),
-        ));
+    for (i, pos) in positions.iter().enumerate() {
+        let phase = i as f32 * std::f32::consts::TAU / positions.len() as f32;
+        crate::character_setup::spawn_enemy_unit(
+            commands,
+            meshes,
+            materials,
+            *pos,
+            (100 + i) as u64,
+            phase,
+        );
     }
 }

@@ -5,6 +5,12 @@
 use nova_engine::prelude::*;
 use nova_map::prelude::*;
 
+use nova_ai::NovaAiPlugin;
+use nova_animation::NovaAnimationPlugin;
+use nova_character::NovaCharacterPlugin;
+use nova_formation::NovaFormationPlugin;
+
+mod character_setup;
 mod combat;
 mod components;
 mod movement;
@@ -19,6 +25,10 @@ fn main() {
         .add_plugin(NovaMapWithFogPlugin)
         .add_plugin(NovaPhysicsPlugin)
         .add_plugin(NovaUiPlugin)
+        .add_plugin(NovaCharacterPlugin)
+        .add_plugin(NovaAiPlugin)
+        .add_plugin(NovaFormationPlugin)
+        .add_plugin(NovaAnimationPlugin)
         .add_plugin(selection::SelectionPlugin)
         .add_plugin(movement::MovementPlugin)
         .add_plugin(combat::CombatPlugin)
