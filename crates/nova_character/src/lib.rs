@@ -16,7 +16,12 @@ use bevy::prelude::*;
 pub struct NovaCharacterPlugin;
 
 impl Plugin for NovaCharacterPlugin {
-    fn build(&self, _app: &mut App) {
-        // 后续任务填充
+    fn build(&self, app: &mut App) {
+        use crate::{attributes::Attributes, state::*};
+        app
+            .register_type::<CharacterState>()
+            .register_type::<AttackCooldown>()
+            .register_type::<Attributes>()
+            .add_systems(Update, state::stun_tick_system);
     }
 }
