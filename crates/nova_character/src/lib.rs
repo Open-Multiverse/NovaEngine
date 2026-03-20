@@ -22,6 +22,17 @@ impl Plugin for NovaCharacterPlugin {
             .register_type::<CharacterState>()
             .register_type::<AttackCooldown>()
             .register_type::<Attributes>()
-            .add_systems(Update, state::stun_tick_system);
+            .register_type::<feedback::HealthBar>()
+            .add_event::<feedback::SpawnDamageNumber>()
+            .add_event::<feedback::TriggerHitFlash>()
+            .add_event::<feedback::UnitDiedEvent>()
+            .add_systems(
+                Update,
+                (
+                    state::stun_tick_system,
+                    feedback::damage_number_system,
+                    feedback::hit_flash_system,
+                ),
+            );
     }
 }
