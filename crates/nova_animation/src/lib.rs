@@ -57,6 +57,13 @@ pub mod clip;
 pub mod player;
 pub mod plugin;
 pub mod prelude;
+pub mod procedural;
+pub mod state_machine;
 pub mod tween;
 
 pub use plugin::NovaAnimationPlugin;
+pub use state_machine::{
+    AnimationState, AnimationStateMachine, AnimationStateConfig, AnimationTransition,
+    TransitionCondition,
+};
+pub use procedural::{ProceduralIdle, procedural_idle_system};
