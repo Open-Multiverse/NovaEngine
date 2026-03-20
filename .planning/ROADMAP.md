@@ -32,12 +32,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. `CharacterBundle` 和 `CharacterStats` 可从 `nova_character` 正常导入和使用
   3. `AiAgent`、`Blackboard`、`BehaviorTree::sequence()`/`action()` 可从 `nova_ai` 正常导入和使用
   4. `BrowserCompatibility::supports_webgpu()` 在原生（非 WASM）环境返回 `false`
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: 在 nova_character 中添加 CharacterStats / CharacterBundle 类型
-- [ ] 01-02: 在 nova_ai 中实现 AiAgent 组件、Blackboard 组件及 builder API
-- [ ] 01-03: 修复 BrowserCompatibility 非 WASM 返回值，修复 wasm_utils::sleep unwrap
+- [ ] 01-01-PLAN.md — 在 nova_character 中添加 CharacterStats/CharacterBundle 类型及 CharacterState::current() 方法
+- [ ] 01-02-PLAN.md — 新建 blackboard.rs，添加 AiAgent 组件，为 BehaviorTree 实现 builder API 和 ActionNode::Custom
+- [ ] 01-03-PLAN.md — 挂载集成测试到 nova_test crate，修复 supports_webgpu() 非 WASM 返回值，验证 cargo test --all 全绿
 
 ### Phase 2: 角色移动系统
 **Goal**: AI 单位在被指令移动时，Transform 每帧真正向目标更新，并与 PathFollow 寻路集成
@@ -48,7 +48,7 @@ Plans:
   2. 单位到达目标后 `CharacterState` 自动切换为 `Idle`，停止移动
   3. 移动速度与 `Attributes.speed` 值成正比，修改该值可观察到速度变化
   4. 单位跟随 `PathFollow` 路径点移动，遇到地形障碍时绕行而非穿越
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 02-01: 实现 movement_system（读取 CharacterState::Moving，更新 Transform）
@@ -63,7 +63,7 @@ Plans:
   2. 目标血量归零后从场景中消失（Dead 状态 + 实体移除）
   3. 攻击冷却期间同一单位无法再次造成伤害（可通过调高冷却值验证）
   4. `CombatEvent` 可被外部监听器捕获，日志中可见伤害事件记录
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 03-01: 实现 combat_system（查询 Attacking 目标，扣除 health，发送 CombatEvent）
@@ -79,7 +79,7 @@ Plans:
   2. `HasTarget`、`EnemyInRange`、`HealthBelow` 条件节点可独立单元测试，结果符合预期
   3. `Blackboard` 可被行为树节点读写，键值变化可通过调试面板观察
   4. 只有带 `AiAgent` 组件的实体受行为树系统处理，其他实体不受影响
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 04-01: 修复 standard_soldier Entity::PLACEHOLDER bug，接入真实感知事件
@@ -95,7 +95,7 @@ Plans:
   2. 发送 `AudioEvent::PlayMusic` 后背景音乐循环播放
   3. 发送 `AudioEvent::StopMusic` 后背景音乐立即停止
   4. 带 `SpatialAudioSettings` 的声源随距离衰减，远处声音比近处小
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 05-01: 将 process_audio_events 替换为 Bevy AudioPlugin / AudioBundle 真实调用
@@ -110,7 +110,7 @@ Plans:
   2. `InstanceBatches.dirty` 标志在批次内容变化时置为 `true`，状态与数据同步
   3. `SceneTester::calculate_scene_bounds` 仅统计带 `Mesh3d` 的实体，相机/灯光不计入包围盒
   4. `RenderTest::capture_and_compare` 实际捕获一帧截图并与预期图像做像素差异比较，超过阈值则失败
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 06-01: 修复 InstanceBatches dirty 标志逻辑，实现真实 GPU 提交或移除假统计
@@ -125,7 +125,7 @@ Plans:
   1. 对同一 start+goal 的重复寻路请求直接返回缓存结果，可通过日志统计命中率验证
   2. 单位静止时 `FogOfWar` 更新函数不被调用，只有移动单位触发视野重算
   3. `behavior_tree_system` 中不再出现每帧整棵行为树的深拷贝，内存分配曲线平稳
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 07-01: 为 Pathfinder::find_path 添加 LRU 路径缓存
@@ -141,7 +141,7 @@ Plans:
   2. 单位移动过程中战争迷雾随视野更新，已探索区域保持可见
   3. AI 单位在感知到敌方单位后自动发起攻击，战斗过程可观察到血条变化与单位消失
   4. `trunk build --release` 成功，产物在 Chrome 113+ 中无控制台错误地运行
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 08-01: 补齐 RTS Demo 对移动/战斗/AI 系统的调用连接
