@@ -96,50 +96,48 @@
 
 ## Traceability
 
-<!-- 由 roadmapper 填充 -->
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TESTFIX-01 | — | Pending |
-| TESTFIX-02 | — | Pending |
-| TESTFIX-03 | — | Pending |
-| TESTFIX-04 | — | Pending |
-| TESTFIX-05 | — | Pending |
-| MOVE-01 | — | Pending |
-| MOVE-02 | — | Pending |
-| MOVE-03 | — | Pending |
-| MOVE-04 | — | Pending |
-| COMBAT-01 | — | Pending |
-| COMBAT-02 | — | Pending |
-| COMBAT-03 | — | Pending |
-| COMBAT-04 | — | Pending |
-| COMBAT-05 | — | Pending |
-| AI-01 | — | Pending |
-| AI-02 | — | Pending |
-| AI-03 | — | Pending |
-| AI-04 | — | Pending |
-| AUDIO-01 | — | Pending |
-| AUDIO-02 | — | Pending |
-| AUDIO-03 | — | Pending |
-| AUDIO-04 | — | Pending |
-| RENDER-01 | — | Pending |
-| RENDER-02 | — | Pending |
-| RENDER-03 | — | Pending |
-| RENDERTEST-01 | — | Pending |
-| RENDERTEST-02 | — | Pending |
-| DEMO-01 | — | Pending |
-| DEMO-02 | — | Pending |
-| DEMO-03 | — | Pending |
-| DEMO-04 | — | Pending |
-| PERF-01 | — | Pending |
-| PERF-02 | — | Pending |
-| PERF-03 | — | Pending |
+| TESTFIX-01 | Phase 1 | Pending |
+| TESTFIX-02 | Phase 1 | Pending |
+| TESTFIX-03 | Phase 1 | Pending |
+| TESTFIX-04 | Phase 1 | Pending |
+| TESTFIX-05 | Phase 1 | Pending |
+| MOVE-01 | Phase 2 | Pending |
+| MOVE-02 | Phase 2 | Pending |
+| MOVE-03 | Phase 2 | Pending |
+| MOVE-04 | Phase 2 | Pending |
+| COMBAT-01 | Phase 3 | Pending |
+| COMBAT-02 | Phase 3 | Pending |
+| COMBAT-03 | Phase 3 | Pending |
+| COMBAT-04 | Phase 3 | Pending |
+| COMBAT-05 | Phase 3 | Pending |
+| AI-01 | Phase 4 | Pending |
+| AI-02 | Phase 4 | Pending |
+| AI-03 | Phase 4 | Pending |
+| AI-04 | Phase 4 | Pending |
+| AUDIO-01 | Phase 5 | Pending |
+| AUDIO-02 | Phase 5 | Pending |
+| AUDIO-03 | Phase 5 | Pending |
+| AUDIO-04 | Phase 5 | Pending |
+| RENDER-01 | Phase 6 | Pending |
+| RENDER-02 | Phase 6 | Pending |
+| RENDER-03 | Phase 6 | Pending |
+| RENDERTEST-01 | Phase 6 | Pending |
+| RENDERTEST-02 | Phase 6 | Pending |
+| DEMO-01 | Phase 8 | Pending |
+| DEMO-02 | Phase 8 | Pending |
+| DEMO-03 | Phase 8 | Pending |
+| DEMO-04 | Phase 8 | Pending |
+| PERF-01 | Phase 7 | Pending |
+| PERF-02 | Phase 7 | Pending |
+| PERF-03 | Phase 7 | Pending |
 
 **Coverage:**
 - v1 requirements: 34 total
-- Mapped to phases: 0
-- Unmapped: 34 ⚠️
+- Mapped to phases: 34
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-20*
-*Last updated: 2026-03-20 after initial definition*
+*Last updated: 2026-03-20 — traceability filled by roadmapper*
