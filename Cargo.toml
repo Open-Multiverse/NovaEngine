@@ -11,6 +11,7 @@ members = [
     "crates/nova_map",
     "crates/nova_character",
     "crates/nova_ai",
+    "crates/nova_formation",
     "crates/nova_engine",
     "examples/basic_demo",
     "examples/physics_demo",
@@ -40,6 +41,7 @@ nova_engine = { path = "crates/nova_engine" }
 nova_map = { path = "crates/nova_map" }
 nova_character = { path = "crates/nova_character" }
 nova_ai = { path = "crates/nova_ai" }
+nova_formation = { path = "crates/nova_formation" }
 
 # External dependencies
 bevy = { version = "0.15", default-features = false, features = [

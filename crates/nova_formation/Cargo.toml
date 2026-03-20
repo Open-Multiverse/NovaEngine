@@ -1,0 +1,10 @@
+[package]
+name = "nova_formation"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Nova Engine 编队系统 - 阵型、编队移动"
+
+[dependencies]
+nova_core = { workspace = true }
+bevy = { workspace = true }
