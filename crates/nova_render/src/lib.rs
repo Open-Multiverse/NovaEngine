@@ -43,8 +43,10 @@ pub mod camera_controller;
 pub mod light;
 pub mod material;
 pub mod mesh;
+pub mod performance;
 pub mod plugin;
 pub mod prelude;
 
 pub use camera_controller::{FpsCameraPlugin, OrbitCameraPlugin};
+pub use performance::NovaPerformancePlugin;
 pub use plugin::NovaRenderPlugin;

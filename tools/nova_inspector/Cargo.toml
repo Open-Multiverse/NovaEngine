@@ -1,0 +1,37 @@
+[package]
+name = "nova_inspector"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+description = "Nova Engine 运行时调试器 - 实体检查、性能监控、场景编辑"
+
+[[bin]]
+name = "nova-inspector"
+path = "src/main.rs"
+
+[dependencies]
+bevy.workspace = true
+bevy_egui.workspace = true
+nova_core.workspace = true
+nova_render.workspace = true
+nova_physics.workspace = true
+nova_map.workspace = true
+nova_character.workspace = true
+nova_ai.workspace = true
+
+log.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+[features]
+default = ["all-panels"]
+all-panels = ["entity-panel", "performance-panel", "resource-panel", "scene-panel"]
+entity-panel = []
+performance-panel = []
+resource-panel = []
+scene-panel = []
+
+[dev-dependencies]
+nova_test = { path = "../../crates/nova_test" }

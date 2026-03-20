@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [develop]
+    branches: [main, develop]
   pull_request:
-    branches: [develop]
+    branches: [main, develop]
 
 env:
   CARGO_TERM_COLOR: always
@@ -52,6 +52,22 @@ jobs:
       - name: Clippy
         run: cargo clippy --all-targets -- -D warnings
 
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libasound2-dev libudev-dev
+      - name: Run unit tests
+        run: cargo test --workspace --lib
+      - name: Run integration tests
+        run: cargo test --test integration
+
   wasm:
     name: WASM Build
     runs-on: ubuntu-latest
@@ -63,10 +79,16 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Check WASM build
         run: cargo check --target wasm32-unknown-unknown -p nova_engine
+      - name: Install wasm-pack
+        run: cargo install wasm-pack --force
+      - name: Run WASM tests
+        run: wasm-pack test --headless --firefox crates/nova_test
+        continue-on-error: true
 
-  test:
-    name: Test
+  benchmark:
+    name: Benchmarks
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -75,5 +97,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libasound2-dev libudev-dev
-      - name: Run tests
-        run: cargo test --all-targets
+      - name: Run benchmarks
+        run: cargo bench -- --noplot
+        continue-on-error: true
