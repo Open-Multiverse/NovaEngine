@@ -1,7 +1,7 @@
 //! 情绪系统 - 动态变化，影响行为
 
-use bevy::prelude::*;
 use crate::personality::Personality;
+use bevy::prelude::*;
 
 /// 情绪类型
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Reflect)]

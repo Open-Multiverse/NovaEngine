@@ -7,8 +7,8 @@ use bevy::prelude::*;
 pub struct DamageNumber {
     pub value: f32,
     pub is_crit: bool,
-    pub lifetime: f32,       // 剩余显示时间（秒）
-    pub velocity: Vec3,      // 漂浮速度
+    pub lifetime: f32,  // 剩余显示时间（秒）
+    pub velocity: Vec3, // 漂浮速度
 }
 
 /// 生成伤害数字事件
@@ -22,13 +22,16 @@ pub struct SpawnDamageNumber {
 /// 受击闪烁组件
 #[derive(Component, Clone, Debug)]
 pub struct HitFlash {
-    pub timer: f32,           // 剩余闪烁时间
-    pub total: f32,           // 总闪烁时间
+    pub timer: f32, // 剩余闪烁时间
+    pub total: f32, // 总闪烁时间
 }
 
 impl HitFlash {
     pub fn new(duration: f32) -> Self {
-        Self { timer: duration, total: duration }
+        Self {
+            timer: duration,
+            total: duration,
+        }
     }
 }
 
@@ -44,7 +47,7 @@ pub struct TriggerHitFlash {
 pub struct HealthBar {
     pub width: f32,
     pub height: f32,
-    pub offset: Vec3,        // 相对实体的偏移
+    pub offset: Vec3, // 相对实体的偏移
     pub show_when_full: bool,
     pub ally_color: Color,
     pub enemy_color: Color,

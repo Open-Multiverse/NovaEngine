@@ -64,7 +64,9 @@ pub struct PersonalityDef {
     pub discipline: f32,
 }
 
-fn default_0_5() -> f32 { 0.5 }
+fn default_0_5() -> f32 {
+    0.5
+}
 
 /// 角色定义
 #[derive(Clone, Debug, Serialize, Deserialize)]

@@ -26,8 +26,7 @@ pub fn formation_follow_system(
             continue;
         };
 
-        let target_pos =
-            formation.slot_world_pos(member.slot_index, leader_transform.translation);
+        let target_pos = formation.slot_world_pos(member.slot_index, leader_transform.translation);
 
         let diff = target_pos - member_transform.translation;
         let distance = diff.length();

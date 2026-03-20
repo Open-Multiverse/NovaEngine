@@ -4,9 +4,7 @@ use bevy::prelude::*;
 use serde::{Deserialize, Serialize};
 
 /// 角色唯一标识
-#[derive(
-    Component, Clone, Copy, Debug, PartialEq, Eq, Hash, Reflect, Serialize, Deserialize,
-)]
+#[derive(Component, Clone, Copy, Debug, PartialEq, Eq, Hash, Reflect, Serialize, Deserialize)]
 pub struct CharacterId(pub u64);
 
 /// 角色类型

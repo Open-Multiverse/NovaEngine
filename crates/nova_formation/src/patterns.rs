@@ -40,9 +40,7 @@ impl FormationPattern {
                 let angle = (index as f32 / 8.0) * std::f32::consts::TAU;
                 Vec3::new(radius * angle.cos(), 0.0, radius * angle.sin())
             }
-            FormationPattern::Custom { slots } => {
-                slots.get(index).copied().unwrap_or(Vec3::ZERO)
-            }
+            FormationPattern::Custom { slots } => slots.get(index).copied().unwrap_or(Vec3::ZERO),
         }
     }
 

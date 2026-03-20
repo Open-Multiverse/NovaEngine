@@ -136,12 +136,7 @@ fn spawn_player_units(
     for (i, pos) in positions.iter().enumerate() {
         let phase = i as f32 * std::f32::consts::TAU / positions.len() as f32;
         crate::character_setup::spawn_player_unit(
-            commands,
-            meshes,
-            materials,
-            *pos,
-            i as u64,
-            phase,
+            commands, meshes, materials, *pos, i as u64, phase,
         );
     }
 }

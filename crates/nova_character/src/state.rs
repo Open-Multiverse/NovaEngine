@@ -49,7 +49,10 @@ pub struct AttackCooldown {
 
 impl AttackCooldown {
     pub fn new(interval: f32) -> Self {
-        Self { timer: 0.0, max: interval }
+        Self {
+            timer: 0.0,
+            max: interval,
+        }
     }
 
     pub fn tick(&mut self, delta: f32) {

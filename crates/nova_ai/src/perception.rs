@@ -107,8 +107,8 @@ pub fn perception_update_system(
             if perception.can_see(perceiver_transform, target_transform.translation) {
                 perceived.visible.push(target_entity);
 
-                let dist = (perceiver_transform.translation - target_transform.translation)
-                    .length();
+                let dist =
+                    (perceiver_transform.translation - target_transform.translation).length();
 
                 if *target_faction != *perceiver_faction {
                     if dist < closest_enemy_dist {

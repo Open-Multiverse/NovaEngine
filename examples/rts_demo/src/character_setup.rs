@@ -5,7 +5,7 @@ use bevy::prelude::*;
 use nova_ai::{
     behavior::BehaviorTree,
     emotion::Emotion,
-    perception::{Perception, PerceivedEntities},
+    perception::{PerceivedEntities, Perception},
     personality::Personality,
 };
 use nova_animation::ProceduralIdle;

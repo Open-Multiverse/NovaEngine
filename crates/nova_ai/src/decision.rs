@@ -84,9 +84,7 @@ fn evaluate_condition(cond: &ConditionNode, ctx: &BtContext) -> BehaviorStatus {
         ConditionNode::HasPerceivedEnemy | ConditionNode::HasTarget => {
             ctx.perceived.closest_enemy.is_some()
         }
-        ConditionNode::HealthBelow(threshold) => {
-            ctx.attributes.health.percentage() < *threshold
-        }
+        ConditionNode::HealthBelow(threshold) => ctx.attributes.health.percentage() < *threshold,
         ConditionNode::EnemyInRange => ctx.perceived.closest_enemy.is_some(),
         ConditionNode::EnemyInAttackRange => ctx.perceived.closest_enemy.is_some(),
         ConditionNode::EmotionIs(target_emotion) => ctx
@@ -139,7 +137,9 @@ fn execute_action(
         ActionNode::Flee => {
             if ctx.perceived.closest_enemy.is_some() {
                 let retreat_pos = ctx.transform.translation + ctx.transform.back() * 10.0;
-                commands.insert(CharacterState::Moving { target: retreat_pos });
+                commands.insert(CharacterState::Moving {
+                    target: retreat_pos,
+                });
             }
             BehaviorStatus::Running
         }
@@ -148,6 +148,7 @@ fn execute_action(
 }
 
 /// 行为树执行系统（每帧 tick 所有有 BehaviorTree 的单位）
+#[allow(clippy::type_complexity)]
 pub fn behavior_tree_system(
     mut query: Query<(
         Entity,

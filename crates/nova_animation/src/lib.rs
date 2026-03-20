@@ -62,8 +62,8 @@ pub mod state_machine;
 pub mod tween;
 
 pub use plugin::NovaAnimationPlugin;
+pub use procedural::{procedural_idle_system, ProceduralIdle};
 pub use state_machine::{
-    AnimationState, AnimationStateMachine, AnimationStateConfig, AnimationTransition,
+    AnimationState, AnimationStateConfig, AnimationStateMachine, AnimationTransition,
     TransitionCondition,
 };
-pub use procedural::{ProceduralIdle, procedural_idle_system};

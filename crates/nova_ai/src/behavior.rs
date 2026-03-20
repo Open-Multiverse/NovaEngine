@@ -47,7 +47,11 @@ pub enum BehaviorNode {
     /// 反转结果
     Inverter(Box<BehaviorNode>),
     /// 固定重复 N 次
-    Repeater { node: Box<BehaviorNode>, times: u32, current: u32 },
+    Repeater {
+        node: Box<BehaviorNode>,
+        times: u32,
+        current: u32,
+    },
 }
 
 /// 行为动作节点
@@ -65,7 +69,7 @@ pub enum ActionNode {
 #[derive(Clone, Debug)]
 pub enum ConditionNode {
     HasTarget,
-    HealthBelow(f32),              // 百分比，如 0.3 表示 30%
+    HealthBelow(f32), // 百分比，如 0.3 表示 30%
     EnemyInRange,
     EnemyInAttackRange,
     IsInFormation,

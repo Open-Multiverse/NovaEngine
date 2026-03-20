@@ -24,8 +24,7 @@ pub struct NovaAiPlugin;
 
 impl Plugin for NovaAiPlugin {
     fn build(&self, app: &mut App) {
-        app
-            .add_event::<perception::PerceptionEvent>()
+        app.add_event::<perception::PerceptionEvent>()
             .add_systems(
                 Update,
                 perception::perception_update_system.in_set(AiSet::Perception),

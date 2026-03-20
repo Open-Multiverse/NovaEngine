@@ -18,8 +18,7 @@ pub struct NovaCharacterPlugin;
 impl Plugin for NovaCharacterPlugin {
     fn build(&self, app: &mut App) {
         use crate::{attributes::Attributes, state::*};
-        app
-            .register_type::<CharacterState>()
+        app.register_type::<CharacterState>()
             .register_type::<AttackCooldown>()
             .register_type::<Attributes>()
             .register_type::<feedback::HealthBar>()

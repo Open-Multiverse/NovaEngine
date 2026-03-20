@@ -19,11 +19,9 @@ impl SlotAssignment {
         slot_positions: &[Vec3],
     ) -> Vec<(Entity, usize)> {
         match self {
-            SlotAssignment::Sequential => entities
-                .iter()
-                .enumerate()
-                .map(|(i, &e)| (e, i))
-                .collect(),
+            SlotAssignment::Sequential => {
+                entities.iter().enumerate().map(|(i, &e)| (e, i)).collect()
+            }
             SlotAssignment::ByDistance => {
                 let mut assigned = vec![false; slot_positions.len()];
                 let mut result = Vec::with_capacity(entities.len());
