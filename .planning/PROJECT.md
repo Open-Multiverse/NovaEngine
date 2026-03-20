@@ -35,7 +35,7 @@ Nova Engine 是一个基于 Bevy ECS 的 Web 3D 游戏引擎，使用 Rust + Web
 
 <!-- 需要构建的新能力 -->
 
-- [ ] 集成测试通过（CharacterBundle / AiAgent / Blackboard API 补齐）
+- ✓ 集成测试通过（CharacterBundle / AiAgent / Blackboard API 补齐）— Validated in Phase 1: 测试基础设施修复
 - [ ] 移动执行系统（AI MoveTo → Transform 实际更新）
 - [ ] 战斗伤害系统（Attacking 状态 → 伤害结算 → 扣血事件）
 - [ ] 音频系统真实实现（AudioEvent → Bevy AudioSink 实际播放）
@@ -77,4 +77,4 @@ Nova Engine 是一个基于 Bevy ECS 的 Web 3D 游戏引擎，使用 Rust + Web
 | 音频集成 Bevy 原生 AudioPlugin | 最小改动路径，避免引入新依赖 | — Pending |
 
 ---
-*Last updated: 2026-03-20 after initialization*
+*Last updated: 2026-03-20 — Phase 1 完成，测试基础设施修复*
