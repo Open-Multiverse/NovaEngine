@@ -30,6 +30,7 @@ impl Plugin for NovaAiPlugin {
                 Update,
                 perception::perception_update_system.in_set(AiSet::Perception),
             )
+            .add_systems(Update, emotion::emotion_tick_system)
             .configure_sets(Update, AiSet::Perception.before(AiSet::Decision));
     }
 }
