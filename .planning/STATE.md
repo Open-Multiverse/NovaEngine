@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 01-02-PLAN.md
-last_updated: "2026-03-20T11:09:26.491Z"
+stopped_at: Completed 01-03-PLAN.md
+last_updated: "2026-03-20T11:19:40Z"
 progress:
   total_phases: 8
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 3
-  completed_plans: 2
+  completed_plans: 3
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-20)
 
 **Core value:** 玩家可以在浏览器中运行一个功能完整的 RTS 演示——单位能移动、战斗、有 AI 决策，地图可以寻路，引擎编译无警告无失败测试。
-**Current focus:** Phase 01 — 测试基础设施修复
+**Current focus:** Phase 01 — 测试基础设施修复（已完成）
 
 ## Current Position
 
-Phase: 01 (测试基础设施修复) — EXECUTING
-Plan: 1 of 3
+Phase: 01 (测试基础设施修复) — COMPLETE
+Plan: 3 of 3 (全部完成)
 
 ## Performance Metrics
 
@@ -48,6 +48,7 @@ Plan: 1 of 3
 *Updated after each plan completion*
 | Phase 01-测试基础设施修复 P01 | 8 | 2 tasks | 2 files |
 | Phase 01-测试基础设施修复 P02 | 3 | 3 tasks | 5 files |
+| Phase 01-测试基础设施修复 P03 | 9 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -64,6 +65,9 @@ Recent decisions affecting current work:
 - [Phase 01-测试基础设施修复]: CharacterBundle 仅派生 Bundle+Default，current() 返回 &Self 满足 matches! 宏语义
 - [Phase 01-测试基础设施修复]: evaluate_node/execute_action 传递 blackboard 参数（替代方案 B），避免在 BtContext 存储原始指针
 - [Phase 01-测试基础设施修复]: ActionNode 手动实现 Debug，因为 Arc<dyn Fn> 不实现 Debug
+- [Phase 01-测试基础设施修复]: 集成测试使用 tests/integration/main.rs + mod 子模块结构
+- [Phase 01-测试基础设施修复]: nova_character/nova_ai 顶层重导出常用类型，避免深层路径导入
+- [Phase 01-测试基础设施修复]: test_behavior_tree_execution 须 spawn Transform/Attributes/PerceivedEntities 并注册 NovaAiPlugin
 
 ### Pending Todos
 
@@ -71,13 +75,14 @@ None yet.
 
 ### Blockers/Concerns
 
-- Phase 1 前: 集成测试因缺失 `CharacterBundle`、`CharacterStats`、`AiAgent`、`Blackboard`、builder API 无法编译，阻塞 CI
+- ~~Phase 1 前: 集成测试因缺失 `CharacterBundle`、`CharacterStats`、`AiAgent`、`Blackboard`、builder API 无法编译，阻塞 CI~~ (已解决 by Phase 01)
+- 环境: Xcode license 未接受，cargo test 无法链接（预先存在的环境问题，需手动 `sudo xcodebuild -license accept`）
 - Phase 2 前: `CharacterState::Moving` 无任何系统响应，AI 单位静止
 - Phase 3 前: `CharacterState::Attacking` 无伤害结算系统
 - Phase 4 前: `standard_soldier()` 使用 `Entity::PLACEHOLDER` 作为追击目标，会导致无效移动或 panic
 
 ## Session Continuity
 
-Last session: 2026-03-20T11:09:26.487Z
-Stopped at: Completed 01-02-PLAN.md
+Last session: 2026-03-20T11:19:40Z
+Stopped at: Completed 01-03-PLAN.md
 Resume file: None

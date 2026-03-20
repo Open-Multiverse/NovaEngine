@@ -155,7 +155,7 @@ Note: Phase 5 (音频) 和 Phase 6 (渲染) 依赖 Phase 1 但与 Phase 2-4 可�
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. 测试基础设施修复 | 1/3 | In Progress|  |
+| 1. 测试基础设施修复 | 3/3 | Complete | 2026-03-20 |
 | 2. 角色移动系统 | 0/2 | Not started | - |
 | 3. 战斗伤害系统 | 0/3 | Not started | - |
 | 4. AI 行为树完善 | 0/3 | Not started | - |
