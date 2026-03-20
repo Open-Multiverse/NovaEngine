@@ -106,10 +106,10 @@ impl BrowserCompatibility {
             .is_some()
     }
     
-    /// 在非 WASM 环境中始终返回 true
+    /// 在非 WASM 环境中始终返回 false（原生环境不支持 WebGPU）
     #[cfg(not(target_arch = "wasm32"))]
     pub fn supports_webgpu() -> bool {
-        true
+        false  // 非 WASM 环境不支持 WebGPU
     }
     
     #[cfg(not(target_arch = "wasm32"))]
