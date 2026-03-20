@@ -13,6 +13,9 @@ nova_animation = { workspace = true }
 nova_audio = { workspace = true }
 nova_assets = { workspace = true }
 nova_map = { workspace = true }
+nova_character = { workspace = true }
+nova_ai = { workspace = true }
+nova_formation = { workspace = true }
 bevy = { workspace = true }
 log = { workspace = true }
 
