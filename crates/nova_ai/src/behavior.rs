@@ -1,6 +1,8 @@
 //! 行为树数据结构
 
+use std::sync::Arc;
 use bevy::prelude::*;
+use crate::blackboard::Blackboard;
 
 /// 行为树执行结果
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -55,7 +57,7 @@ pub enum BehaviorNode {
 }
 
 /// 行为动作节点
-#[derive(Clone, Debug)]
+#[derive(Clone)]
 pub enum ActionNode {
     Idle,
     MoveTo(MoveTarget),
@@ -63,6 +65,25 @@ pub enum ActionNode {
     Flee,
     Patrol { points: Vec<Vec3>, current: usize },
     FollowLeader,
+    /// 自定义闭包动作，接收可变 Blackboard 引用，返回 bool（true=成功，false=失败）
+    /// 使用 Arc 使其可 Clone（引用计数，低成本）
+    Custom(Arc<dyn Fn(&mut Blackboard) -> bool + Send + Sync>),
+}
+
+impl std::fmt::Debug for ActionNode {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ActionNode::Idle => write!(f, "ActionNode::Idle"),
+            ActionNode::MoveTo(t) => write!(f, "ActionNode::MoveTo({:?})", t),
+            ActionNode::Attack(t) => write!(f, "ActionNode::Attack({:?})", t),
+            ActionNode::Flee => write!(f, "ActionNode::Flee"),
+            ActionNode::Patrol { points, current } => {
+                write!(f, "ActionNode::Patrol {{ points: {:?}, current: {} }}", points, current)
+            }
+            ActionNode::FollowLeader => write!(f, "ActionNode::FollowLeader"),
+            ActionNode::Custom(_) => write!(f, "ActionNode::Custom(fn)"),
+        }
+    }
 }
 
 /// 条件节点
@@ -121,5 +142,34 @@ impl BehaviorTree {
             ]),
             BehaviorNode::Action(ActionNode::Idle),
         ]))
+    }
+
+    /// 创建空顺序节点（用作 builder 起点）
+    pub fn sequence() -> Self {
+        Self { root: BehaviorNode::Sequence(vec![]) }
+    }
+
+    /// 创建自定义动作节点，接受返回 bool 的闭包
+    pub fn action(f: impl Fn(&mut Blackboard) -> bool + Send + Sync + 'static) -> Self {
+        Self { root: BehaviorNode::Action(ActionNode::Custom(Arc::new(f))) }
+    }
+
+    /// 链式添加子节点（仅对 Sequence/Selector/Parallel 有效，其他节点类型静默忽略）
+    pub fn child(mut self, child: BehaviorTree) -> Self {
+        match &mut self.root {
+            BehaviorNode::Sequence(children)
+            | BehaviorNode::Selector(children)
+            | BehaviorNode::Parallel(children) => {
+                children.push(child.root);
+            }
+            _ => {}
+        }
+        self
+    }
+}
+
+impl Default for BehaviorTree {
+    fn default() -> Self {
+        Self::sequence()
     }
 }

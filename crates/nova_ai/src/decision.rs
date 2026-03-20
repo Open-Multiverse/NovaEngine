@@ -9,9 +9,20 @@ use crate::{
         ActionNode, AttackTarget, BehaviorNode, BehaviorStatus, BehaviorTree, ConditionNode,
         MoveTarget,
     },
+    blackboard::Blackboard,
     emotion::Emotion,
     perception::PerceivedEntities,
 };
+
+/// AI 控制标记组件——挂载此组件的实体受行为树系统驱动
+#[derive(Component, Default, Clone, Debug)]
+pub struct AiAgent;
+
+impl AiAgent {
+    pub fn new() -> Self {
+        Self
+    }
+}
 
 /// 执行行为树所需的上下文（只读）
 pub struct BtContext<'a> {
@@ -27,11 +38,12 @@ pub fn evaluate_node(
     node: &BehaviorNode,
     ctx: &BtContext,
     commands: &mut EntityCommands,
+    blackboard: &mut Option<Mut<Blackboard>>,
 ) -> BehaviorStatus {
     match node {
         BehaviorNode::Sequence(children) => {
             for child in children {
-                match evaluate_node(child, ctx, commands) {
+                match evaluate_node(child, ctx, commands, blackboard) {
                     BehaviorStatus::Failure => return BehaviorStatus::Failure,
                     BehaviorStatus::Running => return BehaviorStatus::Running,
                     BehaviorStatus::Success => {}
@@ -42,7 +54,7 @@ pub fn evaluate_node(
 
         BehaviorNode::Selector(children) => {
             for child in children {
-                match evaluate_node(child, ctx, commands) {
+                match evaluate_node(child, ctx, commands, blackboard) {
                     BehaviorStatus::Success => return BehaviorStatus::Success,
                     BehaviorStatus::Running => return BehaviorStatus::Running,
                     BehaviorStatus::Failure => {}
@@ -51,7 +63,7 @@ pub fn evaluate_node(
             BehaviorStatus::Failure
         }
 
-        BehaviorNode::Inverter(inner) => match evaluate_node(inner, ctx, commands) {
+        BehaviorNode::Inverter(inner) => match evaluate_node(inner, ctx, commands, blackboard) {
             BehaviorStatus::Success => BehaviorStatus::Failure,
             BehaviorStatus::Failure => BehaviorStatus::Success,
             BehaviorStatus::Running => BehaviorStatus::Running,
@@ -60,7 +72,7 @@ pub fn evaluate_node(
         BehaviorNode::Parallel(children) => {
             let mut any_running = false;
             for child in children {
-                if evaluate_node(child, ctx, commands) == BehaviorStatus::Running {
+                if evaluate_node(child, ctx, commands, blackboard) == BehaviorStatus::Running {
                     any_running = true;
                 }
             }
@@ -73,7 +85,7 @@ pub fn evaluate_node(
 
         BehaviorNode::Condition(cond) => evaluate_condition(cond, ctx),
 
-        BehaviorNode::Action(action) => execute_action(action, ctx, commands),
+        BehaviorNode::Action(action) => execute_action(action, ctx, commands, blackboard),
 
         BehaviorNode::Repeater { .. } => BehaviorStatus::Running,
     }
@@ -105,6 +117,7 @@ fn execute_action(
     action: &ActionNode,
     ctx: &BtContext,
     commands: &mut EntityCommands,
+    blackboard: &mut Option<Mut<Blackboard>>,
 ) -> BehaviorStatus {
     match action {
         ActionNode::Idle => {
@@ -144,6 +157,18 @@ fn execute_action(
             BehaviorStatus::Running
         }
         ActionNode::Patrol { .. } | ActionNode::FollowLeader => BehaviorStatus::Running,
+        ActionNode::Custom(f) => {
+            if let Some(bb) = blackboard.as_deref_mut() {
+                if f(bb) {
+                    BehaviorStatus::Success
+                } else {
+                    BehaviorStatus::Failure
+                }
+            } else {
+                // 没有 Blackboard 组件时安全降级
+                BehaviorStatus::Failure
+            }
+        }
     }
 }
 
@@ -157,10 +182,11 @@ pub fn behavior_tree_system(
         &PerceivedEntities,
         Option<&Emotion>,
         &BehaviorTree,
+        Option<&mut Blackboard>,
     )>,
     mut commands: Commands,
 ) {
-    for (entity, transform, attributes, perceived, emotion, tree) in query.iter_mut() {
+    for (entity, transform, attributes, perceived, emotion, tree, mut blackboard) in query.iter_mut() {
         let ctx = BtContext {
             entity,
             transform,
@@ -171,6 +197,6 @@ pub fn behavior_tree_system(
 
         let root = tree.root.clone();
         let mut entity_commands = commands.entity(entity);
-        evaluate_node(&root, &ctx, &mut entity_commands);
+        evaluate_node(&root, &ctx, &mut entity_commands, &mut blackboard);
     }
 }
