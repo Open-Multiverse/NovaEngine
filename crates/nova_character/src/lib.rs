@@ -10,6 +10,10 @@ pub mod loader;
 pub mod prelude;
 pub mod state;
 
+// 顶层重导出，方便集成测试直接 use nova_character::{...}
+pub use character::{CharacterBundle, CharacterStats};
+pub use state::CharacterState;
+
 use bevy::prelude::*;
 
 /// 角色系统插件

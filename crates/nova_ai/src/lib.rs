@@ -11,6 +11,11 @@ pub mod personality;
 pub mod prelude;
 pub mod tactics;
 
+// 顶层重导出，方便集成测试直接 use nova_ai::{...}
+pub use behavior::BehaviorTree;
+pub use blackboard::Blackboard;
+pub use decision::AiAgent;
+
 use bevy::prelude::*;
 
 /// AI 系统执行顺序
