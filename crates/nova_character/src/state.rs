@@ -38,6 +38,11 @@ impl CharacterState {
     pub fn is_stunned(&self) -> bool {
         matches!(self, Self::Stunned { .. })
     }
+
+    /// 返回当前状态的引用（用于 matches! 宏模式匹配）
+    pub fn current(&self) -> &Self {
+        self
+    }
 }
 
 /// 攻击冷却计时器
