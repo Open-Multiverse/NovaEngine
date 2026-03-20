@@ -3,6 +3,7 @@
 //! 负责角色"怎么想"：感知、行为树决策、性格情绪。
 
 pub mod behavior;
+pub mod blackboard;
 pub mod decision;
 pub mod emotion;
 pub mod perception;
