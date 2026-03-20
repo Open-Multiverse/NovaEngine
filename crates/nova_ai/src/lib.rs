@@ -23,7 +23,13 @@ pub enum AiSet {
 pub struct NovaAiPlugin;
 
 impl Plugin for NovaAiPlugin {
-    fn build(&self, _app: &mut App) {
-        // 后续任务填充
+    fn build(&self, app: &mut App) {
+        app
+            .add_event::<perception::PerceptionEvent>()
+            .add_systems(
+                Update,
+                perception::perception_update_system.in_set(AiSet::Perception),
+            )
+            .configure_sets(Update, AiSet::Perception.before(AiSet::Decision));
     }
 }
