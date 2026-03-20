@@ -1,3 +1,17 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: unknown
+stopped_at: Completed 01-01-PLAN.md
+last_updated: "2026-03-20T11:04:32.414Z"
+progress:
+  total_phases: 8
+  completed_phases: 0
+  total_plans: 3
+  completed_plans: 1
+---
+
 # Project State
 
 ## Project Reference
@@ -5,20 +19,17 @@
 See: .planning/PROJECT.md (updated 2026-03-20)
 
 **Core value:** 玩家可以在浏览器中运行一个功能完整的 RTS 演示——单位能移动、战斗、有 AI 决策，地图可以寻路，引擎编译无警告无失败测试。
-**Current focus:** Phase 1 — 测试基础设施修复
+**Current focus:** Phase 01 — 测试基础设施修复
 
 ## Current Position
 
-Phase: 1 of 8 (测试基础设施修复)
-Plan: 0 of 3 in current phase
-Status: Ready to plan
-Last activity: 2026-03-20 — Roadmap created, project initialized
-
-Progress: [░░░░░░░░░░] 0%
+Phase: 01 (测试基础设施修复) — EXECUTING
+Plan: 1 of 3
 
 ## Performance Metrics
 
 **Velocity:**
+
 - Total plans completed: 0
 - Average duration: —
 - Total execution time: 0 hours
@@ -30,10 +41,12 @@ Progress: [░░░░░░░░░░] 0%
 | - | - | - | - |
 
 **Recent Trend:**
+
 - Last 5 plans: —
 - Trend: —
 
 *Updated after each plan completion*
+| Phase 01-测试基础设施修复 P01 | 8 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -46,6 +59,8 @@ Recent decisions affecting current work:
 - 初始化: 补齐 MoveTo 执行系统 — AI 不能移动则演示无意义
 - 初始化: 先实现战斗再优化性能 — 可玩性优先于性能调优
 - 初始化: 音频集成 Bevy 原生 AudioPlugin — 最小改动路径
+- [Phase 01-测试基础设施修复]: CharacterStats 内部持有 Attributes 实例，通过委托访问器暴露数值，避免破坏已有类型系统
+- [Phase 01-测试基础设施修复]: CharacterBundle 仅派生 Bundle+Default，current() 返回 &Self 满足 matches! 宏语义
 
 ### Pending Todos
 
@@ -60,6 +75,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-20
-Stopped at: Roadmap created (ROADMAP.md + STATE.md written, REQUIREMENTS.md traceability updated)
+Last session: 2026-03-20T11:04:32.410Z
+Stopped at: Completed 01-01-PLAN.md
 Resume file: None

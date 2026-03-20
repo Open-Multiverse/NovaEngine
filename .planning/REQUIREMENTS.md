@@ -7,7 +7,7 @@
 
 ### 测试基础设施修复（TESTFIX）
 
-- [ ] **TESTFIX-01**: `CharacterBundle` 和 `CharacterStats` 类型在 `nova_character` 中存在且可从集成测试导入
+- [x] **TESTFIX-01**: `CharacterBundle` 和 `CharacterStats` 类型在 `nova_character` 中存在且可从集成测试导入
 - [ ] **TESTFIX-02**: `AiAgent`、`Blackboard` 组件在 `nova_ai` 中存在且可从集成测试导入
 - [ ] **TESTFIX-03**: `BehaviorTree::sequence()` / `action()` builder API 在 `nova_ai` 中可用
 - [ ] **TESTFIX-04**: `cargo test --all` 全部通过，无编译错误
@@ -98,7 +98,7 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TESTFIX-01 | Phase 1 | Pending |
+| TESTFIX-01 | Phase 1 | Complete |
 | TESTFIX-02 | Phase 1 | Pending |
 | TESTFIX-03 | Phase 1 | Pending |
 | TESTFIX-04 | Phase 1 | Pending |
