@@ -12,7 +12,7 @@
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: 测试基础设施修复** - 补齐缺失 API，使全部集成测试可编译并通过
+- [x] **Phase 1: 测试基础设施修复** - 补齐缺失 API，使全部集成测试可编译并通过 (completed 2026-03-20)
 - [ ] **Phase 2: 角色移动系统** - 实现 MoveTo 执行侧，AI 单位 Transform 真正移动
 - [ ] **Phase 3: 战斗伤害系统** - 实现 Attacking 状态的伤害结算、扣血与死亡流程
 - [ ] **Phase 4: AI 行为树完善** - 修复 Entity::PLACEHOLDER bug，补齐条件节点求值
@@ -155,7 +155,7 @@ Note: Phase 5 (音频) 和 Phase 6 (渲染) 依赖 Phase 1 但与 Phase 2-4 可�
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. 测试基础设施修复 | 3/3 | Complete | 2026-03-20 |
+| 1. 测试基础设施修复 | 3/3 | Complete    | 2026-03-20 |
 | 2. 角色移动系统 | 0/2 | Not started | - |
 | 3. 战斗伤害系统 | 0/3 | Not started | - |
 | 4. AI 行为树完善 | 0/3 | Not started | - |
