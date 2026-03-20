@@ -1,0 +1,15 @@
+[package]
+name = "nova_character"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Nova Engine 人物建模系统 - 角色数据、属性、状态、视觉反馈"
+
+[dependencies]
+nova_core = { workspace = true }
+bevy = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+criterion = { workspace = true }
