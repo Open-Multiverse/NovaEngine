@@ -15,10 +15,10 @@
 
 ### 角色移动系统（MOVE）
 
-- [ ] **MOVE-01**: AI 单位在 `CharacterState::Moving { target }` 时，其 `Transform` 每帧向 `target` 位置更新
-- [ ] **MOVE-02**: 单位到达目标后自动切换为 `CharacterState::Idle`
-- [ ] **MOVE-03**: 移动速度通过 `Attributes.speed` 或配置值驱动
-- [ ] **MOVE-04**: 移动系统与寻路系统（`PathFollow`）集成，单位沿路径点移动
+- [x] **MOVE-01**: AI 单位在 `CharacterState::Moving { target }` 时，其 `Transform` 每帧向 `target` 位置更新
+- [x] **MOVE-02**: 单位到达目标后自动切换为 `CharacterState::Idle`
+- [x] **MOVE-03**: 移动速度通过 `Attributes.speed` 或配置值驱动
+- [x] **MOVE-04**: 移动系统与寻路系统（`PathFollow`）集成，单位沿路径点移动
 
 ### 战斗伤害系统（COMBAT）
 
@@ -103,10 +103,10 @@
 | TESTFIX-03 | Phase 1 | Complete |
 | TESTFIX-04 | Phase 1 | Complete |
 | TESTFIX-05 | Phase 1 | Complete |
-| MOVE-01 | Phase 2 | Pending |
-| MOVE-02 | Phase 2 | Pending |
-| MOVE-03 | Phase 2 | Pending |
-| MOVE-04 | Phase 2 | Pending |
+| MOVE-01 | Phase 2 | Complete |
+| MOVE-02 | Phase 2 | Complete |
+| MOVE-03 | Phase 2 | Complete |
+| MOVE-04 | Phase 2 | Complete |
 | COMBAT-01 | Phase 3 | Pending |
 | COMBAT-02 | Phase 3 | Pending |
 | COMBAT-03 | Phase 3 | Pending |
