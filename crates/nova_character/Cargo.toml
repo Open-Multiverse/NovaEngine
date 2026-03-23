@@ -7,6 +7,7 @@ description = "Nova Engine 人物建模系统 - 角色数据、属性、状态�
 
 [dependencies]
 nova_core = { workspace = true }
+nova_map = { workspace = true }
 bevy = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
