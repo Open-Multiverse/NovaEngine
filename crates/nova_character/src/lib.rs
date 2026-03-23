@@ -7,11 +7,13 @@ pub mod attributes;
 pub mod character;
 pub mod feedback;
 pub mod loader;
+pub mod movement;
 pub mod prelude;
 pub mod state;
 
 // 顶层重导出，方便集成测试直接 use nova_character::{...}
 pub use character::{CharacterBundle, CharacterStats};
+pub use movement::PreviousCharacterState;
 pub use state::CharacterState;
 
 use bevy::prelude::*;
@@ -25,6 +27,7 @@ impl Plugin for NovaCharacterPlugin {
         app.register_type::<CharacterState>()
             .register_type::<AttackCooldown>()
             .register_type::<Attributes>()
+            .register_type::<movement::PreviousCharacterState>()
             .register_type::<feedback::HealthBar>()
             .add_event::<feedback::SpawnDamageNumber>()
             .add_event::<feedback::TriggerHitFlash>()
@@ -32,6 +35,9 @@ impl Plugin for NovaCharacterPlugin {
             .add_systems(
                 Update,
                 (
+                    movement::update_previous_state_system,
+                    movement::movement_system
+                        .after(movement::update_previous_state_system),
                     state::stun_tick_system,
                     feedback::damage_number_system,
                     feedback::hit_flash_system,

@@ -4,6 +4,7 @@ use bevy::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::attributes::{Attributes, Health};
+use crate::movement::PreviousCharacterState;
 use crate::state::CharacterState;
 
 /// 角色唯一标识
@@ -107,4 +108,5 @@ pub struct CharacterBundle {
     pub state: CharacterState,
     pub transform: Transform,
     pub visibility: Visibility,
+    pub prev_state: PreviousCharacterState,
 }
