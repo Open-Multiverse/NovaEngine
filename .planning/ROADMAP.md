@@ -48,11 +48,11 @@ Plans:
   2. 单位到达目标后 `CharacterState` 自动切换为 `Idle`，停止移动
   3. 移动速度与 `Attributes.speed` 值成正比，修改该值可观察到速度变化
   4. 单位跟随 `PathFollow` 路径点移动，遇到地形障碍时绕行而非穿越
-**Plans**: 3 plans
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: 实现 movement_system（读取 CharacterState::Moving，更新 Transform）
-- [ ] 02-02: 集成 PathFollow 路径跟随，实现到达判定与状态切换
+- [ ] 02-01-PLAN.md — 新增 nova_map 依赖，实现 PreviousCharacterState + movement_system + update_previous_state_system，注册到 NovaCharacterPlugin
+- [ ] 02-02-PLAN.md — 创建 movement_tests.rs 集成测试（MOVE-01 至 MOVE-04），验证 cargo test --all 全绿
 
 ### Phase 3: 战斗伤害系统
 **Goal**: 单位进入 Attacking 状态后触发完整的伤害结算链：扣血、死亡移除、攻击冷却、事件广播
