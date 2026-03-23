@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: unknown
-stopped_at: Phase 2 context gathered
-last_updated: "2026-03-23T06:00:14.429Z"
+status: Ready to execute
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-03-23T06:31:27.536Z"
 progress:
   total_phases: 8
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 5
+  completed_plans: 4
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-20)
 
 **Core value:** 玩家可以在浏览器中运行一个功能完整的 RTS 演示——单位能移动、战斗、有 AI 决策，地图可以寻路，引擎编译无警告无失败测试。
-**Current focus:** Phase 01 — 测试基础设施修复（已完成）
+**Current focus:** Phase 02 — 角色移动系统
 
 ## Current Position
 
-Phase: 01 (测试基础设施修复) — COMPLETE
-Plan: 3 of 3 (全部完成)
+Phase: 02 (角色移动系统) — EXECUTING
+Plan: 2 of 2
 
 ## Performance Metrics
 
@@ -49,6 +49,7 @@ Plan: 3 of 3 (全部完成)
 | Phase 01-测试基础设施修复 P01 | 8 | 2 tasks | 2 files |
 | Phase 01-测试基础设施修复 P02 | 3 | 3 tasks | 5 files |
 | Phase 01-测试基础设施修复 P03 | 9 | 2 tasks | 6 files |
+| Phase 02-角色移动系统 P01 | 8 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,8 @@ Recent decisions affecting current work:
 - [Phase 01-测试基础设施修复]: 集成测试使用 tests/integration/main.rs + mod 子模块结构
 - [Phase 01-测试基础设施修复]: nova_character/nova_ai 顶层重导出常用类型，避免深层路径导入
 - [Phase 01-测试基础设施修复]: test_behavior_tree_execution 须 spawn Transform/Attributes/PerceivedEntities 并注册 NovaAiPlugin
+- [Phase 02-角色移动系统]: PreviousCharacterState 使用 bool newtype 避免克隆含 Entity/Vec3 的完整 CharacterState
+- [Phase 02-角色移动系统]: movement_system 使用 Option<Res<TileMap>> 静默降级，无 TileMap 时直线移动
 
 ### Pending Todos
 
@@ -83,6 +86,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-23T06:00:14.423Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-角色移动系统/02-CONTEXT.md
+Last session: 2026-03-23T06:31:13.156Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: None

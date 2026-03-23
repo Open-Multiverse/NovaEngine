@@ -51,7 +51,7 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — 新增 nova_map 依赖，实现 PreviousCharacterState + movement_system + update_previous_state_system，注册到 NovaCharacterPlugin
+- [x] 02-01-PLAN.md — 新增 nova_map 依赖，实现 PreviousCharacterState + movement_system + update_previous_state_system，注册到 NovaCharacterPlugin
 - [ ] 02-02-PLAN.md — 创建 movement_tests.rs 集成测试（MOVE-01 至 MOVE-04），验证 cargo test --all 全绿
 
 ### Phase 3: 战斗伤害系统
@@ -156,7 +156,7 @@ Note: Phase 5 (音频) 和 Phase 6 (渲染) 依赖 Phase 1 但与 Phase 2-4 可�
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. 测试基础设施修复 | 3/3 | Complete    | 2026-03-20 |
-| 2. 角色移动系统 | 0/2 | Not started | - |
+| 2. 角色移动系统 | 1/2 | In Progress|  |
 | 3. 战斗伤害系统 | 0/3 | Not started | - |
 | 4. AI 行为树完善 | 0/3 | Not started | - |
 | 5. 音频真实实现 | 0/2 | Not started | - |
